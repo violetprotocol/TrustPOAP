@@ -43,6 +43,7 @@ contract TrustPOAP {
         uint256 reviewId = calculateReviewId(hbtId, eventId);
 
         reviewURIbyReviewId[reviewId] = uri;
+        reviewersByEventId[eventId].push(hbtId);
     }
 
     function getEventReviewURIs(uint256 eventId) public view returns(string[] memory reviews) {
