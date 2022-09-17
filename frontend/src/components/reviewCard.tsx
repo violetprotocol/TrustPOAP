@@ -1,11 +1,11 @@
 import { FC } from "react";
 
 interface ReviewCardProps {
-  reviewerAddress: string;
-  reviewScore: number;
-  reviewTitle: string;
-  reviewBody: string;
-  reviewDate: string;
+  reviewerAddress?: string;
+  reviewScore?: number;
+  reviewTitle?: string;
+  reviewBody?: string;
+  reviewDate?: string;
 }
 
 export const ReviewCard: FC<ReviewCardProps> = ({
