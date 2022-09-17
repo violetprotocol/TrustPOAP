@@ -7,6 +7,7 @@ import { useSubmitReview } from "../../context/useTrustPoap";
 import { GitPoap } from "../../services/gitPoapApiClient";
 
 import { postToIpfs } from "../../services/pinata";
+import { FormChecks } from "./formChecks";
 import { ErrorDisplay, LabeledInput } from "./labeledInput";
 import { Stars } from "./stars";
 
@@ -79,21 +80,7 @@ export const ReviewForm = () => {
 
   return (
     <div>
-      <div>
-        <div className="flex justify start">
-          <p className="text-3xl"> ✅ </p>
-          <p className="pl-3 pt-1"> You hold a Humanbound Token </p>
-        </div>
-      </div>
-      <div>
-        <div className="flex justify start">
-          <p className="text-3xl"> ✅ </p>
-          <p className="pl-3 pt-1">
-            {" "}
-            Verifying POAP ownership for this event...{" "}
-          </p>
-        </div>
-      </div>
+      <FormChecks userHasPoap={userPoap !== undefined} userHasHbt={ctx.hasHBT} />
       <form onSubmit={submit} className="prose">
         <LabeledInput text="Rate this event">
           <Stars register={register} />

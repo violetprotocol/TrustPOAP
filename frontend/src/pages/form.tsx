@@ -6,7 +6,7 @@ const Form: NextPage = () => {
     <div className="min-h-screen text-center bg-base-200">
       <div className="p-9 max-w-lg">
         <article className="prose mb-5">
-          <h1>Form Test</h1>
+          <h1>Submit a review for this event</h1>
         </article>
 
         <ReviewForm />
