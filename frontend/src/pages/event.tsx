@@ -3,13 +3,12 @@ import { useContext, useEffect } from "react";
 import EventCard from "../components/EventCard/eventCard";
 import LeaveReviewCard from "../components/leaveReviewCard";
 import ReviewCard from "../components/reviewCard";
-import { useHasPoapFromEvent } from "../context/useGetUserPoapFromEvent";
 import { UserTokensContext } from "../context/userTokens";
-import { useReviews } from "../context/useTrustPoap";
+import { useReviews } from "../context/useReviews";
 
 export const EventPage = () => {
   const ctx = useContext(UserTokensContext);
-  const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
+  // const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
   const eventReviews = useReviews(ctx.event.id);
 
   useEffect(() => {

@@ -25,7 +25,6 @@ export const Hero = () => {
           >
             Search Reviews
           </button>
-          <p>{JSON.stringify(ctx)}</p>
         </div>
       </div>
     </div>
