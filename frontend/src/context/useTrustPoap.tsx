@@ -12,7 +12,7 @@ import soulboundTokenConstants from "./constants/soulboundTokenConstants.json";
 
 export const useReviews = (eventId: number) => {
   const provider = useProvider();
-  const [reviews, setReviews] = useState<number[]>([]);
+  const [reviews, setReviews] = useState<string[]>([]);
 
   useEffect(() => {
     (async () => {
