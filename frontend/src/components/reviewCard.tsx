@@ -17,7 +17,7 @@ export const ReviewCard: FC<ReviewCardProps> = ({
 }) => {
 
   return (
-    <div className="card lg:card-side bg-base-100 shadow-xl max-w-2xl">
+    <div className="card lg:card-bottom bg-base-100 shadow-xl max-w-2xl">
       <div className="card-body">
             <div className="flex justify-between">
             <span className="badge">sudoferraz.eth</span>
