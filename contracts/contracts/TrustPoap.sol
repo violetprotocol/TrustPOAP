@@ -21,25 +21,25 @@ contract TrustPOAP {
         _;
     }
 
-    modifier onlyUnwrittenReview(uint256 hbtId, uint256 tokenId) {
-        uint256 eventId = IPoap(poap).tokenEvent(tokenId);
+    modifier onlyUnwrittenReview(uint256 eventId, uint256 hbtId, uint256 tokenId) {
+        // uint256 eventId = IPoap(poap).tokenEvent(tokenId);
         uint256 reviewId = calculateReviewId(hbtId, eventId);
 
-        require(bytes(reviewURIbyReviewId[reviewId]).length > 0);
+        require(bytes(reviewURIbyReviewId[reviewId]).length == 0, "this human has already written a review");
         _;
     }
 
     modifier onlyAttendee(uint256 tokenId) {
-        require(IGetterLogic(poap).ownerOf(tokenId) == msg.sender);
+        // require(IGetterLogic(poap).ownerOf(tokenId) == msg.sender, "caller did not attend this event");
         _;
     }
 
     function submitReview(uint256 eventId, uint256 hbtId, uint256 poapTokenId, string calldata uri) public 
         onlyUniqueHuman(hbtId)
-        // onlyAttendee(poapTokenId) 
-        onlyUnwrittenReview(hbtId, poapTokenId)
+        onlyAttendee(poapTokenId) 
+        onlyUnwrittenReview(eventId, hbtId, poapTokenId)
     {
-        uint256 eventId = IPoap(poap).tokenEvent(poapTokenId);
+        // uint256 eventId = IPoap(poap).tokenEvent(poapTokenId);
         uint256 reviewId = calculateReviewId(hbtId, eventId);
 
         reviewURIbyReviewId[reviewId] = uri;
