@@ -11,7 +11,7 @@ export const useHasHBT = (address: string) => {
 
   useEffect(() => {
     (async () => {
-      if (!address) return false;
+      if (!address) return;
 
       const environment = process.env.NEXT_PUBLIC_NODE_ENV;
       const soulboundAddress =

@@ -1,18 +1,16 @@
-
 import { useEffect, useState } from "react";
 import { BigNumber, ethers } from "ethers";
 import { useProvider } from "wagmi";
 
-export const useHasHBT = (address: string) => {
+export const useHBTTokenId = (address: string, hasHBT: boolean) => {
   const provider = useProvider();
-  // const [hasHBT, setHasHBT] = useState(false);
-  const [tokenId, setTokenId] = useState<BigNumber>();
+  const [tokenId, setTokenId] = useState<BigNumber>(BigNumber.from(0));
   const soulboundTokenFromBlockPolygon = 33099064;
   const soulboundAddress = "0x41be3a6c17cf76442d9e7b150de4870027d36f52";
 
   useEffect(() => {
     (async () => {
-      if (!address) return false;
+      if (!address || hasHBT) return;
 
       const events = await provider.getLogs({
         fromBlock: soulboundTokenFromBlockPolygon,
@@ -31,7 +29,7 @@ export const useHasHBT = (address: string) => {
         setTokenId(null);
       }
     })();
-  }, [address, provider]);
+  }, [address, provider, hasHBT]);
 
   return tokenId;
 };
