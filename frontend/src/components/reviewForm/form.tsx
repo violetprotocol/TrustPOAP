@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useHasPoapFromEvent } from "../../context/useGetUserPoapFromEvent";
+import { UserTokensContext } from "../../context/userTokens";
+import { GitPoap } from "../../services/gitPoapApiClient";
 
 import { postToIpfs } from "../../services/pinata";
 import { ErrorDisplay, LabeledInput } from "./labeledInput";
@@ -28,9 +31,10 @@ const useReviewForm = () => {
   return { submit, register, errors, ipfsHash };
 };
 
-const submitReview = (hash: string) => {
-  if (!hash) {
-    console.log("Cannot submit review without IPFS hash.");
+const submitReview = (hash: string, hbtTokenId?: string, userPoap?: GitPoap) => {
+    //get humanBoundTokenId
+  if (!hash || !hbtTokenId) {
+    console.log("Cannot submit review without IPFS hash or HB token id.");
     return;
   }
 
@@ -38,6 +42,8 @@ const submitReview = (hash: string) => {
 };
 
 export const ReviewForm = () => {
+  const ctx = useContext(UserTokensContext);
+  const userPoap = useHasPoapFromEvent(ctx.event, ctx.address);
   const { submit, register, errors, ipfsHash } = useReviewForm();
 
   return (
@@ -99,7 +105,7 @@ export const ReviewForm = () => {
           <h2 className="text-left text-lg text-primary">Submit your review</h2>
           <button
             className="btn btn-primary"
-            onClick={() => submitReview(ipfsHash)}
+            onClick={() => submitReview(ipfsHash, ctx.hbtTokenId, userPoap)}
           >
             Submit Review
           </button>
