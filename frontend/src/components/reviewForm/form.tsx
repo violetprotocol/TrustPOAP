@@ -77,6 +77,19 @@ export const ReviewForm = () => {
   const submitReviewTx = useSubmitReview();
 
   return (
+  <div>
+  <div>
+    <div className="flex justify start">
+    <p className="text-3xl"> ✅ {" "} </p>
+    <p className="pl-3 pt-1"> You hold a Humanbound Token </p>
+    </div>
+  </div>
+  <div>
+    <div className="flex justify start">
+    <p className="text-3xl"> ✅ {" "} </p>
+    <p className="pl-3 pt-1"> Verifying POAP ownership for this event... </p>
+    </div>
+  </div>
     <form onSubmit={submit} className="prose">
       <LabeledInput text="Rate this event">
         <Stars register={register} />
@@ -144,5 +157,6 @@ export const ReviewForm = () => {
         </>
       )}
     </form>
+    </div>
   );
 };
