@@ -23,12 +23,6 @@ export type GitPoapEvent = {
 export class GitPoapApiClient {
   getEvent = async (eventId: string) => {
 
-    // const requestOptions = {
-    //   method: "GET",
-    //   headers: { "Content-Type": "application/json" },
-    //   mode: "no-cors"
-    // } as RequestInit;
-
     const getEventUrl = new URLBuilder("https://api.poap.xyz/events/id/")
       .appendPath(eventId.toString())
       .build();
@@ -36,7 +30,6 @@ export class GitPoapApiClient {
     const data = await fetch(getEventUrl.toString())
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       return data;
     }).catch((e) => {
       throw e;

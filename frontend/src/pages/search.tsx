@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserTokensContext } from "../context/userTokens";
 import { GitPoapApiClient, GitPoapEvent } from "../services/gitPoapApiClient";
 
 const Home: NextPage = () => {
@@ -8,6 +9,7 @@ const Home: NextPage = () => {
   const [eventToSearch, setEventToSearch] = useState<string>("");
   const [eventResult, setEventResult] = useState<GitPoapEvent>();
   const apiClient = new GitPoapApiClient();
+  const ctx = useContext(UserTokensContext);
   const router = useRouter();
 
   const handleEventSubmit = async () => {
@@ -24,11 +26,11 @@ const Home: NextPage = () => {
   }, [eventToSearch]);
 
   useEffect(() => {
-    if (eventResult) {
-      console.log(eventResult)
-      router.push("/event")
+    if (eventResult?.id) {
+      router.push("/event");
+      ctx.setEvent(eventResult);
     }
-  }, [eventResult, router]);
+  }, [eventResult, router, ctx]);
 
 
   return (
