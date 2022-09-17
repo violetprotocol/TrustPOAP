@@ -53,7 +53,6 @@ export class GitPoapApiClient {
   }
 
   getUserPoapByEvent = async (eventId: string, walletAddress: string) => {
-   // https://api.poap.tech/actions/scan/{address}/28315
     const getUserPoapByEventUrl = new URLBuilder("https://api.poap.tech/actions/scan/")
       .appendPath(walletAddress.toString().toLowerCase())
       .appendPath(eventId.toString())
