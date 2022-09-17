@@ -7,6 +7,7 @@ import LeaveReviewCard from "../../components/leaveReviewCard";
 import ReviewCard from "../../components/reviewCard";
 import { UserTokensContext } from "../../context/userTokens";
 import { GitPoapApiClient } from "../../services/gitPoapApiClient";
+import { useReviews } from "../../context/useReviews";
 
 export const EventPage = () => {
   const [isLoading, setisLoading] = useState(true);
@@ -14,6 +15,7 @@ export const EventPage = () => {
   const router = useRouter();
   const apiClient = useMemo(() => new GitPoapApiClient(), []);
   const { eventId } = router.query;
+  const eventReviews = useReviews(parseInt(eventId.toString()));
 
   useEffect(() => {
     const fetchEventDetails = async (eventId) => {
@@ -31,6 +33,10 @@ export const EventPage = () => {
     }
   }, [eventId, ctx.event, ctx, apiClient]);
 
+  useEffect(() => {
+    console.log(eventReviews);
+  }, [eventReviews]);
+
   if (isLoading) {
     <ReactLoading type="bubbles" color="#fff" />;
   } else if (ctx?.event) {
@@ -44,6 +50,7 @@ export const EventPage = () => {
           location={ctx.event.virtual_event ? "virtual" : ctx.event.city}
           imageUrl={ctx.event.image_url}
           rating={0}
+          numberOfReviews={eventReviews.length}
         />
         <div>
           <div className="max-w-2xl mx-auto">
