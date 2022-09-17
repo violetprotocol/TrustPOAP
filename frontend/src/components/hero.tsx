@@ -1,4 +1,7 @@
+import { useAccount } from "wagmi";
+
 export const Hero = () => {
+  // const account = useAccount();
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
@@ -8,6 +11,7 @@ export const Hero = () => {
             {"Humanbound Token + POAP => 1 Review allowed"}
           </p>
           <button className="btn btn-primary mt-5 btn-lg">Review</button>
+          {/* <p>{JSON.stringify(account)}</p> */}
         </div>
       </div>
     </div>
