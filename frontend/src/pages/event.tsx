@@ -1,15 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import EventCard from "../components/EventCard/eventCard";
 import LeaveReviewCard from "../components/leaveReviewCard";
 import ReviewCard from "../components/reviewCard";
-import { useHasPoapFromEvent } from "../context/useGetUserPoapFromEvent";
 import { UserTokensContext } from "../context/userTokens";
 
 export const EventPage = () => {
   const ctx = useContext(UserTokensContext);
-  const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
 
-  if (ctx.event) {
+  if (ctx?.event) {
     return (
       <div>
         <EventCard
@@ -32,24 +30,17 @@ export const EventPage = () => {
   }
 
   return (
-    <div>
-      <EventCard
-        name="ETHBerlin"
-        link="https://ethberlin.ooo"
-        description="ETHBerlin3 is a hackathon, a cultural festival, an educational event, a
-        platform for hacktivism, and a community initiative to push the
-        decentralized ecosystem forward."
-        startDate="Sept. 16 2022"
-        location="Berlin"
-        imageUrl="https://poap9.imgix.net/walletconnect-eth-berlin-2022-2022-logo-1661801790740.png"
-        rating={0}
-      />
-      <LeaveReviewCard />
-      <div className="flex">
-        <a className="pl-8"> Sort By: </a>
-        <a className="font-bold pl-1"> Review Date </a>
+    <div className="hero min-h-screen bg-base-200">
+      <div className="hero-content text-center">
+        <div className="max-w-md">
+          <p className="text-2xl py-6">
+            {`Oh no! You took a wrong a turn... We couldn't find this event.`}
+          </p>
+          <a className="btn btn-primary" href="/">
+            Take me back to the homepage
+          </a>
+        </div>
       </div>
-      <ReviewCard />
     </div>
   );
 };
