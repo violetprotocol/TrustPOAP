@@ -1,4 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+
+import { postToIpfs } from "../../services/pinata";
 import { ErrorDisplay, LabeledInput } from "./labeledInput";
 import { Stars } from "./stars";
 
@@ -15,8 +17,9 @@ const useReviewForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit: SubmitHandler<ReviewData> = (data: ReviewData) => {
+  const onSubmit: SubmitHandler<ReviewData> = async (data: ReviewData) => {
     console.log(JSON.stringify(data));
+    await postToIpfs(data);
   };
   const submit = handleSubmit(onSubmit);
 
