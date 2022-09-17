@@ -83,7 +83,7 @@ export const ReviewForm = () => {
 
   return (
     <div>
-      <FormChecks userHasPoap={userPoap !== undefined} userHasHbt={ctx.hasHBT} />
+      <FormChecks userHasPoap={userPoap?.tokenId !== undefined} userHasHbt={ctx.hasHBT} />
       <form onSubmit={submit} className="prose">
         <LabeledInput text="Rate this event">
           <Stars register={register} />
