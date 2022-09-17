@@ -40,33 +40,38 @@ export const useReviews = (eventId: number) => {
 export const useSubmitReview = () => {
   const provider = useProvider();
   const { data: wagmiSigner } = useSigner();
-  const [submitReview, setSubmitReview] =
-    useState<
-      (
-        eventId: number,
-        hbtId: number,
-        poapTokenId: number,
-        uri: string
-      ) => Promise<ContractTransaction>
-    >();
+  const [submitReview, setSubmitReview] = useState<
+    (
+      eventId: number,
+      hbtId: number,
+      poapTokenId: number,
+      uri: string
+    ) => Promise<ContractTransaction>
+  >(
+    () => (eventId: number, hbtId: number, poapTokenId: number, uri: string) => {
+      return null;
+    }
+  );
 
   useEffect(() => {
     (async () => {
-      const environment = process.env.NEXT_PUBLIC_NODE_ENV;
-      const trustPoapAddress =
-        environment === "development"
-          ? soulboundTokenConstants.trustPoapContractAddressPolygonMumbai
-          : soulboundTokenConstants.trustPoapContractAddressPolygon;
+      if (wagmiSigner && provider) {
+        const environment = process.env.NEXT_PUBLIC_NODE_ENV;
+        const trustPoapAddress =
+          environment === "development"
+            ? soulboundTokenConstants.trustPoapContractAddressPolygonMumbai
+            : soulboundTokenConstants.trustPoapContractAddressPolygon;
 
-      let contract = new ethers.Contract(
-        trustPoapAddress,
-        contractAbi,
-        provider
-      );
-      contract = await contract.connect(wagmiSigner);
-      setSubmitReview(contract.submitReview);
+        let contract = new ethers.Contract(
+          trustPoapAddress,
+          contractAbi,
+          provider
+        );
+        contract = await contract.connect(wagmiSigner);
+        setSubmitReview(() => contract.submitReview);
+      }
     })();
-  }, [provider]);
+  }, [wagmiSigner, provider]);
 
   return submitReview;
 };
