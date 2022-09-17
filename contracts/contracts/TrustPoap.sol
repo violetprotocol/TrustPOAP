@@ -1,10 +1,10 @@
 pragma solidity ^0.8.13;
 
 import "./IPoap.sol";
-import "./ITrustPoap.sol";
+import "./ITrustPOAP.sol";
 import "./IGetterLogic.sol";
 
-contract TrustPoap is ITrustPoap {
+contract TrustPOAP is ITrustPOAP {
     address humanboundToken;
     address poap;
 
@@ -17,7 +17,8 @@ contract TrustPoap is ITrustPoap {
     }
 
     modifier onlyUniqueHuman(uint256 hbtId) {
-        require(IGetterLogic(humanboundToken).ownerOf(hbtId) == msg.sender, "caller is not human");
+        require(IGetterLogic(humanboundToken).balanceOf(msg.sender) > 0, "caller is not human");
+        require(IGetterLogic(humanboundToken).ownerOf(hbtId) == msg.sender, "caller is not holder of this hbt");
         _;
     }
 

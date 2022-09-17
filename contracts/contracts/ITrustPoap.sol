@@ -1,6 +1,6 @@
 pragma solidity ^0.8.13;
 
-interface ITrustPoap {
+interface ITrustPOAP {
     struct Review {
         uint256 eventId;
         string uri;
