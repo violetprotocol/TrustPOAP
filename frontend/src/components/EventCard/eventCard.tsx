@@ -9,6 +9,7 @@ type EventCardProps = {
   imageUrl: string;
   link?: string;
   numberOfReviews?: number;
+  rating: number;
 };
 
 export const EventCard = ({
@@ -19,6 +20,7 @@ export const EventCard = ({
   startDate,
   link,
   numberOfReviews = 0,
+  rating = 0,
 }: EventCardProps) => {
   return (
     <>
@@ -33,7 +35,7 @@ export const EventCard = ({
           />
           <div className="ml-6">
             <h1 className="text-5xl font-bold mb-4">{name}</h1>
-            <RatingStars rating={2} />
+            <RatingStars rating={rating} />
             <p className="text-center">{numberOfReviews} reviews</p>
           </div>
         </div>
