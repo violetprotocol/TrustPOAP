@@ -1,16 +1,14 @@
 import { createContext } from "react";
 import { useAccount } from "wagmi";
-import { useCheckHumanBoundToken, useHasHBT } from "./useCheckHumanBoundToken";
+import { useHasHBT } from "./useCheckHumanBoundToken";
 
 export const UserTokensContext = createContext(null);
 
 export const UserTokenProvider = ({ children }) => {
   const { address } = useAccount();
-  const balance = useHasHBT(address);
-  // const {isLoading, tokenId} = useCheckHumanBoundToken(address);
-
+  const hasHBT = useHasHBT(address);
   return (
-    <UserTokensContext.Provider value={{ address: address, balance: balance }}>
+    <UserTokensContext.Provider value={{ address, hasHBT }}>
       {children}
     </UserTokensContext.Provider>
   );
