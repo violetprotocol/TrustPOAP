@@ -1,7 +1,7 @@
 import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import { useAccount } from "wagmi";
-import "./navbar.css";
+// import "./navbar.css";
 
 export const Navbar = () => {
   return (
