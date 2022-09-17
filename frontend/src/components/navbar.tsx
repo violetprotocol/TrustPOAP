@@ -1,11 +1,14 @@
 import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
+import "./navbar.css";
 
 export const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">TrustPOAP</a>
+        <a href="/" className="btn btn-ghost normal-case text-xl">
+          TrustPOAP
+        </a>
       </div>
       <div className="flex-none">
         <Rainbowbutton />
