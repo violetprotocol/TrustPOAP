@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { ReviewForm } from "../../components/reviewForm/form";
+import { ReviewForm } from "../components/reviewForm/form";
 
 const Form: NextPage = () => {
   return (
