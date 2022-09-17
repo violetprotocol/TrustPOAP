@@ -8,8 +8,8 @@ contract TrustPOAP is ITrustPOAP {
     address humanboundToken;
     address poap;
 
-    // maps eventId => HBT id => review
-    mapping(uint256 => mapping(uint256 => Review)) reviewsByEventId;
+    mapping(uint256 => string) reviewURIbyReviewId;
+    mapping(uint256 => uint256[]) reviewersByEventId;
 
     constructor(address _humanboundToken, address _poap) {
         humanboundToken = _humanboundToken;
@@ -24,7 +24,9 @@ contract TrustPOAP is ITrustPOAP {
 
     modifier onlyUnwrittenReview(uint256 hbtId, uint256 tokenId) {
         uint256 eventId = IPoap(poap).tokenEvent(tokenId);
-        require(bytes(reviewsByEventId[eventId][hbtId].uri).length > 0);
+        uint256 reviewId = calculateReviewId(hbtId, eventId);
+
+        require(bytes(reviewURIbyReviewId[reviewId]).length > 0);
         _;
     }
 
@@ -39,6 +41,23 @@ contract TrustPOAP is ITrustPOAP {
         onlyUnwrittenReview(hbtId, poapTokenId)
     {
         uint256 eventId = IPoap(poap).tokenEvent(poapTokenId);
-        reviewsByEventId[eventId][hbtId].uri = uri;
+        uint256 reviewId = calculateReviewId(hbtId, eventId);
+
+        reviewURIbyReviewId[reviewId] = uri;
+    }
+
+    function getEventReviewURIs(uint256 eventId) public view returns(string[] memory reviews) {
+        uint256[] memory reviewers = reviewersByEventId[eventId];
+
+        reviews = new string[](reviewers.length);
+        for (uint256 i = 0; i < reviewers.length; i++) {
+            uint256 reviewer = reviewers[i];
+            uint256 reviewId = calculateReviewId(reviewer, eventId);
+            reviews[i] = reviewURIbyReviewId[reviewId];
+        }
+    }
+
+    function calculateReviewId(uint256 hbt, uint256 eventId) internal pure returns(uint256) {
+        return uint256(keccak256(abi.encodePacked(hbt, eventId)));
     }
 }
