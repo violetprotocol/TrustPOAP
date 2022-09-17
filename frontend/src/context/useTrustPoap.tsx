@@ -45,7 +45,8 @@ export const useSubmitReview = () => {
       eventId: number,
       hbtId: BigNumber,
       poapTokenId: BigNumber,
-      uri: string
+      uri: string,
+      opts?: any
     ) => Promise<ContractTransaction>
   >(
     () =>

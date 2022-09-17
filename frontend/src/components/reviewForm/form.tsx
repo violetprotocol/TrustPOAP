@@ -38,7 +38,8 @@ const submitReview = async (
     eventId: number,
     hbtId: BigNumber,
     poapTokenId: BigNumber,
-    uri: string
+    uri: string,
+    opts?: any
   ) => Promise<ContractTransaction>,
   hash: string,
   hbtTokenId?: string,
