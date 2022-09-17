@@ -3,7 +3,7 @@ import { HttpStatus } from "./http-status.enum";
 
 const PINATA_PIN_POST_URL = "https://api.pinata.cloud/pinning/pinJSONToIPFS";
 
-export const postToIpfs = async (data: ReviewData): string => {
+export const postToIpfs = async (data: ReviewData): Promise<string> => {
   const pinataData = {
     pinataOptions: {
       cidVersion: 1,

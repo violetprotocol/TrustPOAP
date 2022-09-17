@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { postToIpfs } from "../../services/pinata";
@@ -11,6 +12,7 @@ export interface ReviewData {
 }
 
 const useReviewForm = () => {
+  const [ipfsHash, setIpfsHash] = useState<string>("");
   const {
     register,
     handleSubmit,
@@ -18,16 +20,16 @@ const useReviewForm = () => {
   } = useForm();
 
   const onSubmit: SubmitHandler<ReviewData> = async (data: ReviewData) => {
-    console.log(JSON.stringify(data));
-    await postToIpfs(data);
+    const hash = await postToIpfs(data);
+    setIpfsHash(hash);
   };
   const submit = handleSubmit(onSubmit);
 
-  return { submit, register, errors };
+  return { submit, register, errors, ipfsHash };
 };
 
 export const ReviewForm = () => {
-  const { submit, register, errors } = useReviewForm();
+  const { submit, register, errors, ipfsHash } = useReviewForm();
 
   return (
     <form onSubmit={submit}>
@@ -57,9 +59,13 @@ export const ReviewForm = () => {
         <ErrorDisplay>A review content is required</ErrorDisplay>
       )}
 
-      <button type="submit" className="btn btn-primary mt-5">
-        Submit
-      </button>
+      {!ipfsHash && (
+        <button type="submit" className="btn btn-primary mt-5">
+          Submit
+        </button>
+      )}
+
+      {ipfsHash && <p>{ipfsHash}</p>}
     </form>
   );
 };
