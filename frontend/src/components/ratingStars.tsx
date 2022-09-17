@@ -1,7 +1,6 @@
 import React from "react";
 
 export const RatingStars = ({ rating }: { rating: number }) => {
-  console.log("rating", rating);
   return (
     <div className="rating rating-lg rating-half">
       <input

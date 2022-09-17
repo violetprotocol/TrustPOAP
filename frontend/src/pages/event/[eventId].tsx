@@ -15,7 +15,7 @@ export const EventPage = () => {
   const router = useRouter();
   const apiClient = useMemo(() => new GitPoapApiClient(), []);
   const { eventId } = router.query;
-  const eventReviews = useReviews(parseInt(eventId.toString()));
+  const eventReviews = useReviews(parseInt(eventId?.toString()));
 
   useEffect(() => {
     const fetchEventDetails = async (eventId) => {
