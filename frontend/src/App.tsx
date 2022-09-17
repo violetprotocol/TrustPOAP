@@ -26,7 +26,7 @@ const App = () => {
     <div className="App">
       <header>
         <title>Humanbound</title>
-        <meta name="description" content="Humanbound Dapp - from Violet" />
+        <meta name="description" content="Trust POAP - from Violet" />
         <link rel="shortcut icon" href="/violet.svg" />
       </header>
       <WagmiConfig client={wagmiClient}>

@@ -12,7 +12,9 @@ export const Hero = () => {
           <p className="py-8 text-lg">
             {"Humanbound Token + POAP => 1 Review allowed"}
           </p>
-          <button className="btn mt-5 btn-lg">Review</button>
+          <button className="btn mt-5 btn-lg" disabled={!ctx?.address}>
+            Search Reviews
+          </button>
           <p>{JSON.stringify(ctx)}</p>
         </div>
       </div>
