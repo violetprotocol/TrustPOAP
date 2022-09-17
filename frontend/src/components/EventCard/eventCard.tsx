@@ -45,7 +45,7 @@ export const EventCard = ({
             </div>
           </div>
         </div>
-        <div className="row-start-2 container max-w-xl p-4 self-start text-center lg:text-left">
+        <div className="row-start-2 container max-w-6xl lg:max-w-6xl lg:p-10  self-start text-center lg:text-left">
           <h3 className="text-xl mb-4 font-bold">
             {startDate} • {location == "virtual" ? `🌐 ` : `📍 `}
             {location}
