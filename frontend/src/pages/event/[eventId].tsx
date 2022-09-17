@@ -33,10 +33,6 @@ export const EventPage = () => {
     }
   }, [eventId, ctx.event, ctx, apiClient]);
 
-  useEffect(() => {
-    console.log(eventReviews);
-  }, [eventReviews]);
-
   if (isLoading) {
     <ReactLoading type="bubbles" color="#fff" />;
   } else if (ctx?.event) {
