@@ -37,4 +37,3 @@ const init = () => {
 init();
 
 export default WebThreeProvider;
-
