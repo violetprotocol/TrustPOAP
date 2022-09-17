@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import EventCard from "../components/EventCard/eventCard";
 import LeaveReviewCard from "../components/leaveReviewCard";
 import ReviewCard from "../components/reviewCard";
+import { useHasPoapFromEvent } from "../context/useGetUserPoapFromEvent";
 import { UserTokensContext } from "../context/userTokens";
 
 export const EventPage = () => {
   const ctx = useContext(UserTokensContext);
+  const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
+  
+  useEffect(() => {
+    console.log(userPoap);
+  });
   
   if (ctx.event) {
   return (
