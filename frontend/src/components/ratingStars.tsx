@@ -1,9 +1,15 @@
 import React from "react";
 
 export const RatingStars = ({ rating }: { rating: number }) => {
+  console.log("rating", rating);
   return (
     <div className="rating rating-lg rating-half mb-2">
-      <input type="radio" name="rating-10" className="rating-hidden" />
+      <input
+        type="radio"
+        name="rating-10"
+        className="rating-hidden"
+        checked={rating == 0}
+      />
       <input
         type="radio"
         name="rating-10"
