@@ -13,11 +13,25 @@ export type GitPoapEvent = {
   start_date: string;
   end_date: string;
   expiry_date: string;
-  from_admin: boolean;
-  virtual_event: false;
-  event_template_id: number,
-  event_host_id: number;
-  private_event: boolean;
+  from_admin?: boolean;
+  virtual_event?: false;
+  event_template_id?: number,
+  event_host_id?: number;
+  private_event?: boolean;
+}
+
+export type GitPoap = {
+  event: GitPoapEvent;
+  tokenId: string;
+  owner: string;
+  layer: string;
+  created: string;
+  supply: GitPoapSupply;
+}
+
+export type GitPoapSupply = {
+  total: number;
+  order: number;
 }
 
 export class GitPoapApiClient {
@@ -36,5 +50,23 @@ export class GitPoapApiClient {
     });
 
     return data
+  }
+
+  getUserPoapByEvent = async (eventId: string, walletAddress: string) => {
+   // https://api.poap.tech/actions/scan/{address}/28315
+    const getUserPoapByEventUrl = new URLBuilder("https://api.poap.tech/actions/scan/")
+      .appendPath(walletAddress.toString().toLowerCase())
+      .appendPath(eventId.toString())
+      .build();
+
+    const data = await fetch(getUserPoapByEventUrl)
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    }).catch((e) => {
+      throw e;
+    });
+    
+    return data;
   }
 }
