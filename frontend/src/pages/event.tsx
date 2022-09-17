@@ -15,7 +15,7 @@ export const EventPage = () => {
         link={ctx.event.event_url}
         description={ctx.event.description}
         startDate={ctx.event.start_date}
-        location={ctx.event.city}
+        location={ctx.event.virtual_event ? "virtual" : ctx.event.city }
         imageUrl={ctx.event.image_url}
       />
       <LeaveReviewCard />
