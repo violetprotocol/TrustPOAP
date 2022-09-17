@@ -1,10 +1,9 @@
 pragma solidity ^0.8.13;
 
 import "./IPoap.sol";
-import "./ITrustPOAP.sol";
 import "./IGetterLogic.sol";
 
-contract TrustPOAP is ITrustPOAP {
+contract TrustPOAP {
     address humanboundToken;
     address poap;
 
@@ -35,9 +34,9 @@ contract TrustPOAP is ITrustPOAP {
         _;
     }
 
-    function submitReview(uint256 hbtId, uint256 poapTokenId, string calldata uri) public override 
+    function submitReview(uint256 eventId, uint256 hbtId, uint256 poapTokenId, string calldata uri) public 
         onlyUniqueHuman(hbtId)
-        onlyAttendee(poapTokenId) 
+        // onlyAttendee(poapTokenId) 
         onlyUnwrittenReview(hbtId, poapTokenId)
     {
         uint256 eventId = IPoap(poap).tokenEvent(poapTokenId);
