@@ -21,12 +21,16 @@ export const EventPage = () => {
           imageUrl={ctx.event.image_url}
           rating={0}
         />
-        <LeaveReviewCard />
-        <div className="flex">
-          <a className="pl-8"> Sort By: </a>
-          <a className="font-bold pl-1"> Review Date </a>
+        <div>
+          <div className="max-w-2xl mx-auto">
+            <LeaveReviewCard />
+            <div className="flex">
+              <a className="pl-8"> Sort By: </a>
+              <a className="font-bold pl-1"> Review Date </a>
+            </div>
+            <ReviewCard />
+          </div>
         </div>
-        <ReviewCard />
       </div>
     );
   }
