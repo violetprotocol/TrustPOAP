@@ -24,7 +24,7 @@ export const EventCard = ({
 }: EventCardProps) => {
   return (
     <>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
           <Image
             src={imageUrl}
@@ -45,7 +45,7 @@ export const EventCard = ({
             </div>
           </div>
         </div>
-        <div className="row-start-2 container max-w-6xl lg:max-w-6xl lg:p-10  self-start text-center lg:text-left">
+        <div className="row-start-2 px-2 mb-8 container max-w-6xl lg:mb-0 lg:max-w-6xl lg:px-10 lg:py-4 lg:pb-8 self-start text-center lg:text-left">
           <h3 className="text-xl mb-4 font-bold">
             {startDate} • {location == "virtual" ? `🌐 ` : `📍 `}
             {location}
