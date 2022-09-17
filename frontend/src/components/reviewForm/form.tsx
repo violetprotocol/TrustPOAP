@@ -27,6 +27,7 @@ const useReviewForm = () => {
 
   const onSubmit: SubmitHandler<ReviewData> = async (data: ReviewData) => {
     const hash = await postToIpfs(data);
+    console.log(hash, "*******");
     setIpfsHash(hash);
   };
   const submit = handleSubmit(onSubmit);
@@ -120,6 +121,7 @@ export const ReviewForm = () => {
             </button>
           </>
         )}
+      </form>
 
         {ipfsHash && (
           <>
@@ -151,7 +153,6 @@ export const ReviewForm = () => {
             </button>
           </>
         )}
-      </form>
     </div>
   );
 };
