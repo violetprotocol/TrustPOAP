@@ -1,13 +1,9 @@
 {
-  "soulboundTokenContractAddressKovan": "0x6b591325Db5Bc220F98B6f09bD0C4E60B12821A6",
   "soulboundTokenContractAddressPolygonMumbai": "0x1888649d566908e0a4ac17978740f6a04f600a51",
   "soulboundTokenFromBlockPolygonMumbai": 28100366,
-  "soulboundTokenContractAddressRinkeby": "0x88339f95a4d7daaf868bd44eafac0559be946589",
-  "soulboundTokenFromBlockRinkeby": 11370323,
   "soulboundTokenContractAddressPolygon": "0x41be3a6c17cf76442d9e7b150de4870027d36f52",
   "soulboundTokenFromBlockPolygon": 33099064,
-  "dummySignature": "0x69a743df8888853f109620cf920686ba791585d2ae5f1464fcaa2c064b257e712c90abd375b691129a229b01fad13253d2a2cbc19cc5f65a30a26feec681b3891b",
-  "dummyTokenAddress": "0x25af0cca791baee922d9fa0744880ae6e0422021",
-  "dummyExpiry": 1647612480,
+  "trustPoapContractAddressPolygonMumbai": "0x1888649d566908e0a4ac17978740f6a04f600a51",
+  "trustPoapContractAddressPolygon": "0x41be3a6c17cf76442d9e7b150de4870027d36f52",
   "rawTxDataSliceIndexes": [266, 394]
 }

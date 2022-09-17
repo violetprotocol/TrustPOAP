@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BigNumber, ethers } from "ethers";
 import { useProvider } from "wagmi";
 
-import contractAbi from "./constants/contractAbi.json";
+import contractAbi from "./constants/humanboundContractABI.json";
 import soulboundTokenConstants from "./constants/soulboundTokenConstants.json";
 
 export const useHasHBT = (address: string) => {

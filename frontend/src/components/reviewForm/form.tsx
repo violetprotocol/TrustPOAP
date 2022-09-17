@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useHasPoapFromEvent } from "../../context/useGetUserPoapFromEvent";
 import { UserTokensContext } from "../../context/userTokens";
+import { useSubmitReview } from "../../context/useTrustPoap";
 import { GitPoap } from "../../services/gitPoapApiClient";
 
 import { postToIpfs } from "../../services/pinata";
@@ -31,14 +32,29 @@ const useReviewForm = () => {
   return { submit, register, errors, ipfsHash };
 };
 
-const submitReview = (hash: string, hbtTokenId?: string, userPoap?: GitPoap) => {
-    //get humanBoundTokenId
+const submitReview = async (
+  hash: string,
+  hbtTokenId?: string,
+  userPoap?: GitPoap
+) => {
+  //get humanBoundTokenId
+  const submitReview = useSubmitReview();
+
   if (!hash || !hbtTokenId) {
     console.log("Cannot submit review without IPFS hash or HB token id.");
     return;
   }
 
-  return;
+  const tx = await submitReview(
+    userPoap.event.id,
+    parseInt(hbtTokenId),
+    parseInt(userPoap.tokenId),
+    hash
+  );
+
+  const receipt = tx.wait();
+
+  return (await receipt).transactionHash;
 };
 
 export const ReviewForm = () => {
