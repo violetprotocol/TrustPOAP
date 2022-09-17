@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useContext } from "react";
 import EventCard from "../components/EventCard/eventCard";
 import LeaveReviewCard from "../components/leaveReviewCard";
@@ -42,9 +43,9 @@ export const EventPage = () => {
           <p className="text-2xl py-6">
             {`Oh no! You took a wrong a turn... We couldn't find this event.`}
           </p>
-          <a className="btn btn-primary" href="/">
+          <Link className="btn btn-primary" href="/">
             Take me back to the homepage
-          </a>
+          </Link>
         </div>
       </div>
     </div>
