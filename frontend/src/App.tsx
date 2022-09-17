@@ -1,7 +1,9 @@
+import { Hero } from "./components/hero";
+
 const App = () => {
   return (
     <div className="App">
-      <button className="btn btn-primary">Foo</button>
+      <Hero />
     </div>
   );
 };
