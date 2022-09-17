@@ -32,42 +32,42 @@ const useReviewForm = () => {
   return { submit, register, errors, ipfsHash };
 };
 
-const submitReview = async (
-  hash: string,
-  hbtTokenId?: string,
-  userPoap?: GitPoap
-) => {
-  //get humanBoundTokenId
-  const submitReview = useSubmitReview();
-
-  if (!hash || !hbtTokenId) {
-    console.log("Cannot submit review without IPFS hash or HB token id.");
-    return;
-  }
-
-  let txHash;
-  try {
-    const tx = await submitReview(
-      userPoap.event.id,
-      parseInt(hbtTokenId),
-      parseInt(userPoap.tokenId),
-      hash
-    );
-
-    const receipt = tx.wait();
-    txHash = (await receipt).transactionHash;
-  } catch (e) {
-    alert(e);
-    return;
-  }
-
-  return txHash;
-};
-
 export const ReviewForm = () => {
   const ctx = useContext(UserTokensContext);
   const userPoap = useHasPoapFromEvent(ctx.event, ctx.address);
   const { submit, register, errors, ipfsHash } = useReviewForm();
+  const submitReviewTx = useSubmitReview();
+
+  const submitReview = async (
+    hash: string,
+    hbtTokenId?: string,
+    userPoap?: GitPoap
+  ) => {
+    //get humanBoundTokenId
+
+    if (!hash || !hbtTokenId) {
+      console.log("Cannot submit review without IPFS hash or HB token id.");
+      return;
+    }
+
+    let txHash;
+    try {
+      const tx = await submitReviewTx(
+        userPoap.event.id,
+        parseInt(hbtTokenId),
+        parseInt(userPoap.tokenId),
+        hash
+      );
+
+      const receipt = tx.wait();
+      txHash = (await receipt).transactionHash;
+    } catch (e) {
+      alert(e);
+      return;
+    }
+
+    return txHash;
+  };
 
   return (
     <form onSubmit={submit} className="prose">
