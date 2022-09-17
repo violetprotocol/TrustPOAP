@@ -45,16 +45,23 @@ const submitReview = async (
     return;
   }
 
-  const tx = await submitReview(
-    userPoap.event.id,
-    parseInt(hbtTokenId),
-    parseInt(userPoap.tokenId),
-    hash
-  );
+  let txHash;
+  try {
+    const tx = await submitReview(
+      userPoap.event.id,
+      parseInt(hbtTokenId),
+      parseInt(userPoap.tokenId),
+      hash
+    );
 
-  const receipt = tx.wait();
+    const receipt = tx.wait();
+    txHash = (await receipt).transactionHash;
+  } catch (e) {
+    alert(e);
+    return;
+  }
 
-  return (await receipt).transactionHash;
+  return txHash;
 };
 
 export const ReviewForm = () => {
