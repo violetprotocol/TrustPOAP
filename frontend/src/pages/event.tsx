@@ -24,7 +24,7 @@ export const EventPage = () => {
         <div>
           <div className="max-w-2xl mx-auto">
             <LeaveReviewCard />
-            <div className="flex">
+            <div className="flex my-7">
               <a className="pl-8"> Sort By: </a>
               <a className="font-bold pl-1"> Review Date </a>
             </div>

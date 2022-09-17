@@ -3,7 +3,7 @@ import React from "react";
 export const RatingStars = ({ rating }: { rating: number }) => {
   console.log("rating", rating);
   return (
-    <div className="rating rating-lg rating-half mb-2">
+    <div className="rating rating-lg rating-half">
       <input
         type="radio"
         name="rating-10"
