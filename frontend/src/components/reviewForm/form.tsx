@@ -28,11 +28,20 @@ const useReviewForm = () => {
   return { submit, register, errors, ipfsHash };
 };
 
+const submitReview = (hash: string) => {
+  if (!hash) {
+    console.log("Cannot submit review without IPFS hash.");
+    return;
+  }
+
+  return;
+};
+
 export const ReviewForm = () => {
   const { submit, register, errors, ipfsHash } = useReviewForm();
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} className="prose">
       <LabeledInput text="Rate this event">
         <Stars register={register} />
       </LabeledInput>
@@ -59,13 +68,43 @@ export const ReviewForm = () => {
         <ErrorDisplay>A review content is required</ErrorDisplay>
       )}
 
+      <h2 className="text-left text-lg text-primary mb-1">
+        Upload your review on IPFS
+      </h2>
       {!ipfsHash && (
-        <button type="submit" className="btn btn-primary mt-5">
-          Submit
-        </button>
+        <>
+          <button type="submit" className="btn btn-primary mt-5">
+            Upload Review
+          </button>
+        </>
       )}
 
-      {ipfsHash && <p>{ipfsHash}</p>}
+      {ipfsHash && (
+        <>
+          <button disabled className="btn btn-primary mt-5">
+            🥳 Review Uploaded !
+          </button>
+
+          <p className="break-words bg-base-300 rounded-xl px-5 py-3">
+            🎉 Review stored at{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`http://ipfs.io/ipfs/${ipfsHash}`}
+            >
+              ipfs://{ipfsHash}
+            </a>
+          </p>
+
+          <h2 className="text-left text-lg text-primary">Submit your review</h2>
+          <button
+            className="btn btn-primary"
+            onClick={() => submitReview(ipfsHash)}
+          >
+            Submit Review
+          </button>
+        </>
+      )}
     </form>
   );
 };

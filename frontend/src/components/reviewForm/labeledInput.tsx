@@ -2,7 +2,7 @@ export const LabeledInput = ({ children, text }) => {
   return (
     <div className="form-control w-full max-w-xs my-3">
       <label className="label">
-        <span className="label-text text-lg">{text}</span>
+        <span className="text-lg font-bold text-primary">{text}</span>
       </label>
       {children}
     </div>
