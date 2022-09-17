@@ -34,7 +34,7 @@ const useReviewForm = () => {
 
 export const ReviewForm = () => {
   const ctx = useContext(UserTokensContext);
-  const userPoap = useHasPoapFromEvent(ctx.event, ctx.address);
+  const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
   const { submit, register, errors, ipfsHash } = useReviewForm();
   const submitReviewTx = useSubmitReview();
 
