@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { UserTokensContext } from "../context/userTokens";
+
 export const Hero = () => {
+  const ctx = useContext(UserTokensContext);
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
@@ -8,6 +13,7 @@ export const Hero = () => {
             {"Humanbound Token + POAP => 1 Review allowed"}
           </p>
           <button className="btn mt-5 btn-lg">Review</button>
+          <p>{JSON.stringify(ctx)}</p>
         </div>
       </div>
     </div>

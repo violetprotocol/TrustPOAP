@@ -5,6 +5,7 @@ import { WagmiConfig } from "wagmi";
 import { Hero } from "./components/hero";
 import WebThreeProvider from "./context/web3Provider";
 import { Navbar } from "./components/navbar";
+import { UserTokenProvider } from "./context/userTokens";
 
 const provider = WebThreeProvider();
 
@@ -30,8 +31,10 @@ const App = () => {
       </header>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          <Navbar />
-          <Hero />
+          <UserTokenProvider>
+            <Navbar />
+            <Hero />
+          </UserTokenProvider>
         </RainbowKitProvider>
       </WagmiConfig>
     </div>
