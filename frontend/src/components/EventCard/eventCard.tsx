@@ -33,10 +33,16 @@ export const EventCard = ({
             width="300px"
             height="300px"
           />
-          <div className="ml-6">
+          <div className="ml-6 text-center lg:text-left">
             <h1 className="text-5xl font-bold mb-4">{name}</h1>
-            <RatingStars rating={rating} />
-            <p className="text-center">{numberOfReviews} reviews</p>
+            <div className="lg:flex">
+              <div className="flex flex-col items-center lg:flex-row">
+                <RatingStars rating={rating} />
+                <p className="mt-3 lg:mt-1 lg:ml-3">
+                  {numberOfReviews} reviews
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         <div className="row-start-2 container max-w-xl p-4 self-start text-center lg:text-left">
