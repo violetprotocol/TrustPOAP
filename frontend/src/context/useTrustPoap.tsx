@@ -5,7 +5,7 @@ import {
   ContractTransaction,
   ethers,
 } from "ethers";
-import { useProvider } from "wagmi";
+import { useProvider, useSigner } from "wagmi";
 
 import contractAbi from "./constants/trustpoapContractABI.json";
 import soulboundTokenConstants from "./constants/soulboundTokenConstants.json";
@@ -39,6 +39,7 @@ export const useReviews = (eventId: number) => {
 
 export const useSubmitReview = () => {
   const provider = useProvider();
+  const { data: wagmiSigner } = useSigner();
   const [submitReview, setSubmitReview] =
     useState<
       (
@@ -57,11 +58,12 @@ export const useSubmitReview = () => {
           ? soulboundTokenConstants.trustPoapContractAddressPolygonMumbai
           : soulboundTokenConstants.trustPoapContractAddressPolygon;
 
-      const contract = new ethers.Contract(
+      let contract = new ethers.Contract(
         trustPoapAddress,
         contractAbi,
         provider
       );
+      contract = await contract.connect(wagmiSigner);
       setSubmitReview(contract.submitReview);
     })();
   }, [provider]);

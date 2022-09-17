@@ -1,3 +1,4 @@
+import { ContractTransaction } from "ethers";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useHasPoapFromEvent } from "../../context/useGetUserPoapFromEvent";
@@ -32,42 +33,48 @@ const useReviewForm = () => {
   return { submit, register, errors, ipfsHash };
 };
 
+const submitReview = async (
+  submitReviewTx: (
+    eventId: number,
+    hbtId: number,
+    poapTokenId: number,
+    uri: string
+  ) => Promise<ContractTransaction>,
+  hash: string,
+  hbtTokenId?: string,
+  userPoap?: GitPoap
+) => {
+  //get humanBoundTokenId
+
+  if (!hash || !hbtTokenId) {
+    console.log("Cannot submit review without IPFS hash or HB token id.");
+    return;
+  }
+
+  let txHash;
+  try {
+    const tx = await submitReviewTx(
+      userPoap.event.id,
+      parseInt(hbtTokenId),
+      parseInt(userPoap.tokenId),
+      hash
+    );
+
+    const receipt = tx.wait();
+    txHash = (await receipt).transactionHash;
+  } catch (e) {
+    alert(e);
+    return;
+  }
+
+  return txHash;
+};
+
 export const ReviewForm = () => {
   const ctx = useContext(UserTokensContext);
   const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
   const { submit, register, errors, ipfsHash } = useReviewForm();
   const submitReviewTx = useSubmitReview();
-
-  const submitReview = async (
-    hash: string,
-    hbtTokenId?: string,
-    userPoap?: GitPoap
-  ) => {
-    //get humanBoundTokenId
-
-    if (!hash || !hbtTokenId) {
-      console.log("Cannot submit review without IPFS hash or HB token id.");
-      return;
-    }
-
-    let txHash;
-    try {
-      const tx = await submitReviewTx(
-        userPoap.event.id,
-        parseInt(hbtTokenId),
-        parseInt(userPoap.tokenId),
-        hash
-      );
-
-      const receipt = tx.wait();
-      txHash = (await receipt).transactionHash;
-    } catch (e) {
-      alert(e);
-      return;
-    }
-
-    return txHash;
-  };
 
   return (
     <form onSubmit={submit} className="prose">
@@ -128,7 +135,9 @@ export const ReviewForm = () => {
           <h2 className="text-left text-lg text-primary">Submit your review</h2>
           <button
             className="btn btn-primary"
-            onClick={() => submitReview(ipfsHash, ctx.hbtTokenId, userPoap)}
+            onClick={() =>
+              submitReview(submitReviewTx, ipfsHash, ctx.hbtTokenId, userPoap)
+            }
           >
             Submit Review
           </button>
