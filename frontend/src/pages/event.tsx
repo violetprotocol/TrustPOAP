@@ -7,11 +7,7 @@ import { UserTokensContext } from "../context/userTokens";
 
 export const EventPage = () => {
   const ctx = useContext(UserTokensContext);
-  const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
-  
-  useEffect(() => {
-    console.log(userPoap);
-  });
+  // const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
   
   if (ctx.event) {
   return (

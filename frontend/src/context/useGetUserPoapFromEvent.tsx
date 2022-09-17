@@ -10,10 +10,10 @@ export const useHasPoapFromEvent = (eventId: string, address: string) => {
       if (!address) return;
 
       const response = await gitPoapApiClient.getUserPoapByEvent(eventId, address);
-      if (response?.id) {
+      if (response?.tokenId) {
         setPoap(response);
-      } 
-    });
+      }
+    })();
     
   }, [address, eventId]);
 
