@@ -1,13 +1,12 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { useEffect, useState } from 'react';
-import WebThreeProvider from "../context/web3Provider";
-import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { WagmiConfig } from 'wagmi';
-import { Navbar } from '../components/navbar';
-import { UserTokenProvider } from '../context/userTokens';
-import { Hero } from '../components/hero';
+import type { AppProps } from "next/app";
+import { useEffect, useState } from "react";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { WagmiConfig } from "wagmi";
+import "../styles/globals.css";
 
+import WebThreeProvider from "../context/web3Provider";
+import { Navbar } from "../components/navbar";
+import { UserTokenProvider } from "../context/userTokens";
 
 const useIsMounted = (): boolean => {
   const [isMounted, setMounted] = useState<boolean>(false);
@@ -35,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <RainbowKitProvider chains={chains}>
           <UserTokenProvider>
             <Navbar />
-            <Hero />
+            <Component {...pageProps} />
           </UserTokenProvider>
         </RainbowKitProvider>
       </WagmiConfig>
@@ -43,4 +42,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp
+export default MyApp;

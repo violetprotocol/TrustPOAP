@@ -24,3 +24,7 @@ a {
     background: black;
   }
 }
+
+.bg-black {
+  background-color: #70acc7;
+}
