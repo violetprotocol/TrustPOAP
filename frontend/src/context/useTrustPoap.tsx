@@ -43,14 +43,20 @@ export const useSubmitReview = () => {
   const [submitReview, setSubmitReview] = useState<
     (
       eventId: number,
-      hbtId: number,
-      poapTokenId: number,
+      hbtId: BigNumber,
+      poapTokenId: BigNumber,
       uri: string
     ) => Promise<ContractTransaction>
   >(
-    () => (eventId: number, hbtId: number, poapTokenId: number, uri: string) => {
-      return null;
-    }
+    () =>
+      (
+        eventId: number,
+        hbtId: BigNumber,
+        poapTokenId: BigNumber,
+        uri: string
+      ) => {
+        return null;
+      }
   );
 
   useEffect(() => {
