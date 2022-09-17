@@ -12,8 +12,13 @@ dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });
 
 // Ensure that we have all the environment variables we need.
 const mnemonic: string | undefined = process.env.MNEMONIC;
+const privateKey: string | undefined = process.env.PRIVATE_KEY;
 if (!mnemonic) {
   throw new Error("Please set your MNEMONIC in a .env file");
+}
+
+if (!privateKey && !mnemonic) {
+  throw new Error("Please set your PRIVATE_KEY or MNEMONIC in a .env file");
 }
 
 const infuraApiKey: string | undefined = process.env.INFURA_API_KEY;
@@ -23,36 +28,37 @@ if (!infuraApiKey) {
 
 const chainIds = {
   "arbitrum-mainnet": 42161,
+  "arbitrum-goerli": 421613,
   avalanche: 43114,
   bsc: 56,
-  goerli: 5,
   hardhat: 31337,
   mainnet: 1,
   "optimism-mainnet": 10,
+  "optimism-goerli": 420,
   "polygon-mainnet": 137,
   "polygon-mumbai": 80001,
+  rinkeby: 4,
+  kovan: 42,
+  goerli: 5,
 };
 
-function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
-  let jsonRpcUrl: string;
-  switch (chain) {
-    case "avalanche":
-      jsonRpcUrl = "https://api.avax.network/ext/bc/C/rpc";
-      break;
-    case "bsc":
-      jsonRpcUrl = "https://bsc-dataseed1.binance.org";
-      break;
-    default:
-      jsonRpcUrl = "https://" + chain + ".infura.io/v3/" + infuraApiKey;
-  }
-  return {
-    accounts: {
-      count: 10,
+function getChainConfig(network: keyof typeof chainIds): NetworkUserConfig {
+  const url: string = "https://" + network + ".infura.io/v3/" + infuraApiKey;
+  let accounts;
+
+  // Prioritise private key if it is available
+  if (privateKey) accounts = [`0x${process.env.PRIVATE_KEY}`];
+  else if (mnemonic)
+    accounts = {
+      count: 20,
       mnemonic,
       path: "m/44'/60'/0'/0",
-    },
-    chainId: chainIds[chain],
-    url: jsonRpcUrl,
+    };
+
+  return {
+    accounts,
+    chainId: chainIds[network],
+    url,
   };
 }
 
@@ -89,8 +95,8 @@ const config: HardhatUserConfig = {
     goerli: getChainConfig("goerli"),
     mainnet: getChainConfig("mainnet"),
     optimism: getChainConfig("optimism-mainnet"),
-    "polygon-mainnet": getChainConfig("polygon-mainnet"),
-    "polygon-mumbai": getChainConfig("polygon-mumbai"),
+    polygon: getChainConfig("polygon-mainnet"),
+    mumbai: getChainConfig("polygon-mumbai"),
   },
   paths: {
     artifacts: "./artifacts",
