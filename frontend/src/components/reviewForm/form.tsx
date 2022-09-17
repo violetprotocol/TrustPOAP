@@ -15,10 +15,12 @@ export interface ReviewData {
   rating: number;
   title: string;
   content: string;
+  address?: string;
 }
 
 const useReviewForm = () => {
   const [ipfsHash, setIpfsHash] = useState<string>("");
+  const ctx = useContext(UserTokensContext);
   const {
     register,
     handleSubmit,
@@ -26,8 +28,8 @@ const useReviewForm = () => {
   } = useForm();
 
   const onSubmit: SubmitHandler<ReviewData> = async (data: ReviewData) => {
-    const hash = await postToIpfs(data);
-    console.log(hash, "*******");
+    const dataWithAddress = { ...data, address: ctx.address } as ReviewData;
+    const hash = await postToIpfs(dataWithAddress);
     setIpfsHash(hash);
   };
   const submit = handleSubmit(onSubmit);
