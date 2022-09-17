@@ -1,8 +1,14 @@
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import { UserTokensContext } from "../context/userTokens";
 
 export const Hero = () => {
   const ctx = useContext(UserTokensContext);
+  const router = useRouter();
+
+  const routeToSearch = () => {
+    router.push("/search");
+  };
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -12,7 +18,7 @@ export const Hero = () => {
           <p className="py-8 text-lg">
             {"Humanbound Token + POAP => 1 Review allowed"}
           </p>
-          <button className="btn mt-5 btn-lg" disabled={!ctx?.address}>
+          <button className="btn mt-5 btn-lg" disabled={!ctx?.address} onClick={routeToSearch}>
             Search Reviews
           </button>
           <p>{JSON.stringify(ctx)}</p>

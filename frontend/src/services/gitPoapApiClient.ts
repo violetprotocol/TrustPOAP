@@ -1,6 +1,6 @@
 import { URLBuilder } from "./urlBuilder";
 
-export type gitPoapEvent = {
+export type GitPoapEvent = {
   id: number
   fancy_id: string;
   name: string;
@@ -21,26 +21,27 @@ export type gitPoapEvent = {
 }
 
 export class GitPoapApiClient {
-  getEvent = async (eventId: number) => {
+  getEvent = async (eventId: string) => {
 
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include" as RequestCredentials,
-    };
+    // const requestOptions = {
+    //   method: "GET",
+    //   headers: { "Content-Type": "application/json" },
+    //   mode: "no-cors"
+    // } as RequestInit;
 
     const getEventUrl = new URLBuilder("https://api.poap.xyz/events/id/")
       .appendPath(eventId.toString())
       .build();
 
-    const response = await fetch(getEventUrl.toString(), requestOptions);
+    const data = await fetch(getEventUrl.toString())
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      return data;
+    }).catch((e) => {
+      throw e;
+    });
 
-    if (response.status !== 200) {
-      const errorData = await response.json();
-      throw new Error(errorData.message);
-    }
-
-    const data: gitPoapEvent = await response.json();
-    return data as gitPoapEvent;
+    return data
   }
 }
