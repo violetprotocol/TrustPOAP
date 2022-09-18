@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 export const Stars = ({ register }) => {
-  const [rating, setRating] = useState<number>(5);
+  const [rating, setRating] = useState<number>(2);
 
   return (
-    <div className="rating gap-1">
+    <div className="rating gap-1 rating-lg">
       <input
         type="radio"
         name="rating-3"
-        className="mask mask-heart bg-red-400"
+        className="mask mask-star-2 bg-accent"
         onClick={() => setRating(1)}
         checked={rating === 1}
         value={1}
@@ -17,7 +17,7 @@ export const Stars = ({ register }) => {
       <input
         type="radio"
         name="rating-3"
-        className="mask mask-heart bg-orange-400"
+        className="mask mask-star-2 bg-accent"
         onClick={() => setRating(2)}
         checked={rating === 2}
         value={2}
@@ -26,7 +26,7 @@ export const Stars = ({ register }) => {
       <input
         type="radio"
         name="rating-3"
-        className="mask mask-heart bg-yellow-400"
+        className="mask mask-star-2 bg-accent"
         onClick={() => setRating(3)}
         checked={rating === 3}
         value={3}
@@ -35,7 +35,7 @@ export const Stars = ({ register }) => {
       <input
         type="radio"
         name="rating-3"
-        className="mask mask-heart bg-lime-400"
+        className="mask mask-star-2 bg-accent"
         onClick={() => setRating(4)}
         checked={rating === 4}
         value={4}
@@ -44,7 +44,7 @@ export const Stars = ({ register }) => {
       <input
         type="radio"
         name="rating-3"
-        className="mask mask-heart bg-green-400"
+        className="mask mask-star-2 bg-accent"
         onClick={() => setRating(5)}
         checked={rating === 5}
         value={5}
