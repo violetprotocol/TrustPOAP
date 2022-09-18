@@ -70,12 +70,13 @@ export const EventPage = () => {
 
   if (isLoading) {
     return (
-      <div className="absolute inset-1/2">
+      <div className="min-h-screen w-full flex items-center">
         <ReactLoading
           type="bubbles"
           color="#e3598c"
           height="100px"
           width="100px"
+          className="mx-auto"
         />
       </div>
     );
