@@ -35,8 +35,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <UserTokenProvider>
-            <Navbar />
-            <Component {...pageProps} key={router.asPath} />
+            <div className="from-primary bg-gradient-to-br min-h-screen">
+              <Navbar />
+              <Component {...pageProps} key={router.asPath} />
+            </div>
           </UserTokenProvider>
         </RainbowKitProvider>
       </WagmiConfig>

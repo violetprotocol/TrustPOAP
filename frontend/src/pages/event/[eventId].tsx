@@ -108,7 +108,7 @@ export const EventPage = () => {
     );
   } else {
     return (
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen">
         <div className="hero-content text-center">
           <div className="max-w-md">
             <p className="text-2xl py-6">
