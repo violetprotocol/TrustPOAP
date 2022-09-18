@@ -25,7 +25,7 @@ export const EventPage = () => {
     return () => {
       setQueriedEventId(null);
     };
-  }, [eventId]);
+  }, [eventId, queriedEventId]);
 
   const fetchEventDetails = useCallback(
     async (eventId) => {
