@@ -47,7 +47,7 @@ export const EventPage = () => {
   }, [eventId, queriedEventId]);
 
   const fetchEventDetails = useCallback(
-    async (eventId) => {
+    async (eventId: string) => {
       if (!eventId) return;
       try {
         setIsLoading(true);
