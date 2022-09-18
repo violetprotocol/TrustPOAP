@@ -23,9 +23,9 @@ export const EventCard = ({
   rating = 0,
 }: EventCardProps) => {
   return (
-    <>
-      <div className="hero bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
+    <div className="hero lg:place-items-start bg-base-200">
+      <div className="mx-auto">
+        <div className="hero-content flex-col lg:flex-row lg:justify-start">
           <Image
             src={imageUrl}
             className="max-w-sm rounded-full"
@@ -64,7 +64,7 @@ export const EventCard = ({
           <p className="text-xl">{description}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
