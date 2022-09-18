@@ -39,8 +39,12 @@ const useReviewForm = () => {
 };
 
 export const ReviewForm = () => {
+  const ctx = useContext(UserTokensContext);
+  const { hasHBT, userPOAP, isLoading } = ctx;
   const { submit, register, errors, ipfsHash } = useReviewForm();
   const submitReviewTx = useSubmitReview();
+
+  if (!hasHBT || !userPOAP || isLoading) return null;
 
   return (
     <>

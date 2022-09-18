@@ -1,4 +1,6 @@
-import { FC, useContext } from "react";
+import { useContext } from "react";
+import ReactLoading from "react-loading";
+
 import { UserTokensContext } from "../../context/userTokens";
 
 const ErrorCard = ({ children }) => {
@@ -55,8 +57,21 @@ const YouWereNotThere = () => {
 
 export const FormChecks = () => {
   const ctx = useContext(UserTokensContext);
-  const { hasHBT, userPOAP } = ctx;
+  const { hasHBT, userPOAP, isLoading } = ctx;
   const hasPOAP = userPOAP?.tokenId !== undefined;
+
+  if (isLoading)
+    return (
+      <div className="w-full mt-9">
+        <ReactLoading
+          type="bubbles"
+          color="#e3598c"
+          height="90px"
+          width="90px"
+          className="mx-auto"
+        />
+      </div>
+    );
 
   return (
     <>
