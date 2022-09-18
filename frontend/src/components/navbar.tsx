@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 export const Navbar = () => {
   const router = useRouter();
   return (
-    <div className="navbar bg-base-200">
+    <div className="navbar">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
           {router.pathname == "/" ? (

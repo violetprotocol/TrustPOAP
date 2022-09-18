@@ -23,7 +23,7 @@ export const EventCard = ({
   rating = 0,
 }: EventCardProps) => {
   return (
-    <div className="hero lg:place-items-start bg-base-200">
+    <div className="hero lg:place-items-start">
       <div className="mx-auto">
         <div className="hero-content flex-col lg:flex-row lg:justify-start">
           <Image

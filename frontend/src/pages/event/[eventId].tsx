@@ -70,18 +70,19 @@ export const EventPage = () => {
 
   if (isLoading) {
     return (
-      <div className="absolute inset-1/2">
+      <div className="min-h-screen w-full flex items-center">
         <ReactLoading
           type="bubbles"
           color="#e3598c"
           height="100px"
           width="100px"
+          className="mx-auto"
         />
       </div>
     );
   } else if (ctx?.event) {
     return (
-      <div>
+      <div className="pb-5">
         <EventCard
           name={ctx.event.name}
           link={ctx.event.event_url}
@@ -108,7 +109,7 @@ export const EventPage = () => {
     );
   } else {
     return (
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen">
         <div className="hero-content text-center">
           <div className="max-w-md">
             <p className="text-2xl py-6">

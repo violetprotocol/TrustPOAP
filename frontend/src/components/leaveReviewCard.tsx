@@ -10,7 +10,7 @@ export const LeaveReviewCard = (props) => {
   const eventId = ctx?.event?.id;
 
   return (
-    <div className="card lg:card-bottom bg-base-100 max-w-2xl my-4">
+    <div className="card lg:card-bottom max-w-2xl my-4">
       <div className="card-body">
         <div className="mx-auto w-1/2">
           <Link href={{ pathname: "/form/[id]", query: { id: eventId } }}>

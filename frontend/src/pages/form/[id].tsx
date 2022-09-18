@@ -5,9 +5,9 @@ import { FormChecks } from "../../components/reviewForm/formChecks";
 
 const Form: NextPage = () => {
   return (
-    <div className="min-h-screen bg-base-200 pt-5">
-      <div className="hero-content text-center">
-        <div className="max-w-lg bg-base-200">
+    <div className="min-h-screen pt-5">
+      <div className="hero-content text-center mx-auto">
+        <div className="max-w-lg">
           <article className="prose mb-5">
             <h1>Submit a review for this event</h1>
           </article>

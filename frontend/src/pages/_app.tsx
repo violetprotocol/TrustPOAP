@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const { chains, wagmiClient } = provider;
   return (
-    <div className="App">
+    <div className="from-primary bg-gradient-to-br to-secondary via-slate-200 h-full">
       <header>
         <title>Humanbound</title>
         <meta name="description" content="Trust POAP - from Violet" />
