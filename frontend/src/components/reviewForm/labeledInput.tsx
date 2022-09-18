@@ -1,8 +1,8 @@
 export const LabeledInput = ({ children, text }) => {
   return (
-    <div className="form-control w-full max-w-xs my-3">
+    <div className="form-control mx-auto my-3 mt-5">
       <label className="label">
-        <span className="text-lg font-bold text-primary">{text}</span>
+        <span className="text-xl font-bold text-primary">{text}</span>
       </label>
       {children}
     </div>

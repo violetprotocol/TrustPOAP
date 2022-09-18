@@ -83,78 +83,74 @@ export const ReviewForm = () => {
 
   return (
     <div>
-      <FormChecks userHasPoap={userPoap?.tokenId !== undefined} userHasHbt={ctx.hasHBT} />
-      <form onSubmit={submit} className="prose">
-        <LabeledInput text="Rate this event">
-          <Stars register={register} />
-        </LabeledInput>
-        {errors?.rating && <ErrorDisplay>Rating is required</ErrorDisplay>}
+      <div>
+        <FormChecks
+          userHasPoap={userPoap?.tokenId !== undefined}
+          userHasHbt={ctx.hasHBT}
+        />
+        <form onSubmit={submit}>
+          <div className="mx-auto p-2 flex content-center">
+            <LabeledInput text="Rate this event">
+              <Stars register={register} />
+            </LabeledInput>
+            {errors?.rating && <ErrorDisplay>Rating is required</ErrorDisplay>}
+          </div>
 
-        <LabeledInput text="Title">
-          <input
-            type="text"
-            placeholder="ETHBerlin Recommendation"
-            className="input input-bordered w-full max-w-xs"
-            {...register("title", { required: true })}
-          />
-        </LabeledInput>
-        {errors?.title && (
-          <ErrorDisplay>A review title is required</ErrorDisplay>
-        )}
+          <LabeledInput text="Title">
+            <input
+              type="text"
+              placeholder="ETHBerlin Recommendation"
+              className="input input-bordered wmax-w-xs"
+              {...register("title", { required: true })}
+            />
+          </LabeledInput>
+          {errors?.title && (
+            <ErrorDisplay>A review title is required</ErrorDisplay>
+          )}
 
-        <LabeledInput text="Review Content">
-          <textarea
-            className="textarea textarea-bordered"
-            placeholder="Write your review here"
-            {...register("content", { required: true })}
-          />
-        </LabeledInput>
-        {errors?.content && (
-          <ErrorDisplay>A review content is required</ErrorDisplay>
-        )}
+          <LabeledInput text="Review Content">
+            <textarea
+              className="textarea textarea-bordered wmax-w-xs"
+              placeholder="Write your review here"
+              {...register("content", { required: true })}
+            />
+          </LabeledInput>
+          {errors?.content && (
+            <ErrorDisplay>A review content is required</ErrorDisplay>
+          )}
 
-        <h2 className="text-left text-lg text-primary mb-1">
-          Upload your review on IPFS
-        </h2>
+          <button
+            disabled={!!ipfsHash}
+            type="submit"
+            className="btn btn-primary mt-5 w-1/2"
+          >
+            Step 1. Upload Review {ipfsHash ? "✔️" : ""}
+          </button>
+        </form>
+
         {!ipfsHash && (
-          <>
-            <button type="submit" className="btn btn-primary mt-5">
-              Upload Review
-            </button>
-          </>
-        )}
-      </form>
-
-        {ipfsHash && (
-          <>
-            <button disabled className="btn btn-primary mt-5">
-              🥳 Review Uploaded !
-            </button>
-
-            <p className="break-words bg-base-300 rounded-xl px-5 py-3">
-              🎉 Review stored at{" "}
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href={`http://ipfs.io/ipfs/${ipfsHash}`}
-              >
-                ipfs://{ipfsHash}
-              </a>
-            </p>
-
-            <h2 className="text-left text-lg text-primary">
-              Submit your review
-            </h2>
-            <button
-              className="btn btn-primary"
-              onClick={() =>
-                submitReview(submitReviewTx, ipfsHash, ctx.hbtTokenId, userPoap)
-              }
+          <p className="break-words rounded-xl px-5 py-3 text-xs font-mono">
+            🎉 Review stored at{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`http://ipfs.io/ipfs/${ipfsHash}`}
             >
-              Submit Review
-            </button>
-          </>
+              ipfs://{ipfsHash}
+            </a>
+          </p>
         )}
+
+        <button
+          disabled={!ipfsHash}
+          className="btn btn-primary mt-5 w-1/2"
+          onClick={() =>
+            submitReview(submitReviewTx, ipfsHash, ctx.hbtTokenId, userPoap)
+          }
+        >
+          Step 2. Submit Review
+        </button>
+      </div>
     </div>
   );
 };
