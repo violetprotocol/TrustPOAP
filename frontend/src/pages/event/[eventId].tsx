@@ -82,7 +82,7 @@ export const EventPage = () => {
     );
   } else if (ctx?.event) {
     return (
-      <div className="pb-5 min-h-screen">
+      <div className="min-h-screen">
         <EventCard
           name={ctx.event.name}
           link={ctx.event.event_url}
