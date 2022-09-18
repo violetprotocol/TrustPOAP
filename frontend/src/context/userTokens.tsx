@@ -14,6 +14,7 @@ const useHasPOAP = (address: string, eventId: number) => {
 
   useEffect(() => {
     if (!eventId) return;
+    if (id === eventId.toString()) return;
     setId(eventId.toString());
   }, [eventId]);
 
@@ -38,7 +39,7 @@ export const UserTokenProvider = ({ children }) => {
   useEventId(setEvent);
   const userPOAP = useHasPOAP(address, event?.id);
 
-  const ctxValue = { address, hasHBT, userPOAP, hbtTokenId, event, setEvent };
+  const ctxValue = { address, hasHBT, hbtTokenId, event, setEvent, userPOAP };
 
   return (
     <UserTokensContext.Provider value={ctxValue}>

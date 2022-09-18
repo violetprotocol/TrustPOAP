@@ -11,8 +11,10 @@ export const LeaveReviewCard = () => {
     <div className="card lg:card-bottom bg-base-100 shadow-xl max-w-2xl my-4">
       <div className="card-body">
         <div className="flex justify-between items-center">
-          <Link href={`/form/${eventId}`}>
-            <button className="btn btn-secondary">Leave a review</button>
+          <Link href={{ pathname: "/form/[id]", query: { id: eventId } }}>
+            <button disabled={!eventId} className="btn btn-secondary">
+              Leave a review
+            </button>
           </Link>
         </div>
       </div>
