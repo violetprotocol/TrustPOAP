@@ -15,7 +15,8 @@ export interface ReviewData {
   rating: number;
   title: string;
   content: string;
-  address?: string;
+  reviewer?: string;
+  creationTime?: string;
 }
 
 const useReviewForm = () => {
@@ -28,7 +29,10 @@ const useReviewForm = () => {
   } = useForm();
 
   const onSubmit: SubmitHandler<ReviewData> = async (data: ReviewData) => {
-    const dataWithAddress = { ...data, address: ctx.address } as ReviewData;
+    const dataWithAddress = {
+      ...data,
+      reviewer: ctx.hbtTokenId.toHexString(),
+    } as ReviewData;
     const hash = await postToIpfs(dataWithAddress);
     setIpfsHash(hash);
   };

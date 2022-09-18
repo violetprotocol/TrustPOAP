@@ -47,6 +47,7 @@ export const useReviewHashes = (eventId: number) => {
         provider
       );
       const reviewURIs = await contract.callStatic.getEventReviewURIs(eventId);
+      console.log(reviewURIs);
       setHashes(reviewURIs);
     })();
   }, [eventId, provider]);

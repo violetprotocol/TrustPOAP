@@ -16,7 +16,24 @@ export const EventPage = () => {
   const router = useRouter();
   const apiClient = useMemo(() => new GitPoapApiClient(), []);
   const { eventId } = router.query;
-  const eventReviews = useReviews(parseInt(eventId?.toString()));
+  const reviews = useReviews(parseInt(eventId?.toString()));
+
+  const reviewCards = reviews.map((review) => (
+    <ReviewCard
+      reviewerId={review.reviewer}
+      reviewScore={review.rating}
+      reviewTitle={review.title}
+      reviewBody={review.content}
+      reviewDate={review.creationTime}
+      reviewRating={review.rating}
+    />
+  ));
+
+  const averageRating =
+    reviews.length > 0
+      ? reviews.reduce((total, review) => total + review.rating, 0) /
+        reviews.length
+      : 3;
 
   useEffect(() => {
     if (!queriedEventId) {
@@ -65,17 +82,19 @@ export const EventPage = () => {
           startDate={ctx.event.start_date}
           location={ctx.event.virtual_event ? "virtual" : ctx.event.city}
           imageUrl={ctx.event.image_url}
-          rating={0}
-          numberOfReviews={eventReviews.length}
+          rating={averageRating}
+          numberOfReviews={reviews.length}
         />
         <div>
           <div className="max-w-2xl mx-auto">
-            <LeaveReviewCard />
-            <div className="flex my-7">
-              <a className="pl-8"> Sort By: </a>
-              <a className="font-bold pl-1"> Review Date </a>
-            </div>
-            <ReviewCard />
+            <LeaveReviewCard firstReview={reviews.length == 0} />
+            {reviews.length > 0 && (
+              <div className="flex my-7">
+                <a className="pl-8"> Sort By: </a>
+                <a className="font-bold pl-1"> Review Date </a>
+              </div>
+            )}
+            {reviewCards}
           </div>
         </div>
       </div>

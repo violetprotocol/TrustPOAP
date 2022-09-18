@@ -2,7 +2,7 @@ import { FC } from "react";
 import { RatingStars } from "./ratingStars";
 
 interface ReviewCardProps {
-  reviewerAddress?: string;
+  reviewerId?: string;
   reviewScore?: number;
   reviewTitle?: string;
   reviewBody?: string;
@@ -11,16 +11,14 @@ interface ReviewCardProps {
 }
 
 export const ReviewCard: FC<ReviewCardProps> = ({
-  reviewerAddress,
+  reviewerId,
   reviewScore,
   reviewTitle,
   reviewBody,
   reviewDate,
   reviewRating = 0,
 }) => {
-  const reviewerAddressParsed = reviewerAddress
-    ? reviewerAddress
-    : "sudoferraz.eth";
+  const reviewerIdParsed = reviewerId ? reviewerId : "sudoferraz.eth";
   const reviewScoreParsed = reviewScore ? reviewScore : 3;
   const reviewTitleParsed = reviewTitle
     ? reviewTitle
@@ -34,7 +32,7 @@ export const ReviewCard: FC<ReviewCardProps> = ({
     <div className="card lg:card-bottom bg-base-100 shadow-xl max-w-2xl mb-4">
       <div className="card-body">
         <div className="flex justify-between items-center">
-          <span className="badge">{reviewerAddressParsed}</span>
+          <span className="badge">{reviewerIdParsed}</span>
           <RatingStars rating={reviewRating} />
         </div>
         <h2 className="card-title pt-3">{reviewTitleParsed}</h2>

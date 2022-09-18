@@ -5,7 +5,7 @@ import { useHasPoapFromEvent } from "../context/useGetUserPoapFromEvent";
 import { UserTokensContext } from "../context/userTokens";
 import { RatingStars } from "./ratingStars";
 
-export const LeaveReviewCard = () => {
+export const LeaveReviewCard = (props) => {
   const router = useRouter();
   const ctx = useContext(UserTokensContext);
   const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
@@ -19,7 +19,9 @@ export const LeaveReviewCard = () => {
       <div className="card-body">
         <div className="flex justify-between items-center">
           <a className="link" onClick={onClick}>
-            Leave a review
+            {props.firstReview
+              ? "Be the first to leave a review"
+              : "Leave a review"}
           </a>
         </div>
       </div>
