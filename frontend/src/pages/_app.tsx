@@ -29,6 +29,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <div className="bg-gradient-to-br from-base-200 to-secondary via-base-200 h-full">
       <header>
         <title>Humanbound</title>
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
         <meta name="description" content="Trust POAP - from Violet" />
         <link rel="shortcut icon" href="/violet.svg" />
       </header>
