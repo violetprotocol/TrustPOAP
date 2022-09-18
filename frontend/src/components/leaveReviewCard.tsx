@@ -1,24 +1,19 @@
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { useContext } from "react";
-import { useHasPoapFromEvent } from "../context/useGetUserPoapFromEvent";
+
 import { UserTokensContext } from "../context/userTokens";
 
 export const LeaveReviewCard = () => {
-  const router = useRouter();
   const ctx = useContext(UserTokensContext);
-  const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
-
-  const onClick = async () => {
-    router.push({ pathname: "/form", query: { id: ctx.event.id } });
-  };
+  const eventId = ctx?.event?.id;
 
   return (
     <div className="card lg:card-bottom bg-base-100 shadow-xl max-w-2xl my-4">
       <div className="card-body">
         <div className="flex justify-between items-center">
-          <a className="link" onClick={onClick}>
-            Leave a review
-          </a>
+          <Link href={`/form/${eventId}`}>
+            <button className="btn btn-secondary">Leave a review</button>
+          </Link>
         </div>
       </div>
     </div>
