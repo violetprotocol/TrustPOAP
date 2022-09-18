@@ -1,11 +1,9 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useContext } from "react";
 
 import { UserTokensContext } from "../context/userTokens";
 
-export const LeaveReviewCard = (props) => {
-  const router = useRouter();
+export const LeaveReviewCard = () => {
   const ctx = useContext(UserTokensContext);
   const eventId = ctx?.event?.id;
 
@@ -14,7 +12,7 @@ export const LeaveReviewCard = (props) => {
       <div className="card-body">
         <div className="mx-auto w-1/2">
           <Link href={{ pathname: "/form/[id]", query: { id: eventId } }}>
-            <button disabled={!eventId} className="btn btn-secondary w-full">
+            <button disabled={!eventId} className="btn btn-primary w-full">
               {props.firstReview
                 ? "Be the first to leave a review"
                 : "Leave a review"}
