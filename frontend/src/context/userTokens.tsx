@@ -16,7 +16,7 @@ const useHasPOAP = (address: string, eventId: number) => {
     if (!eventId) return;
     if (id === eventId.toString()) return;
     setId(eventId.toString());
-  }, [eventId]);
+  }, [eventId, id]);
 
   return userPOAP;
 };
