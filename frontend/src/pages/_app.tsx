@@ -35,10 +35,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <UserTokenProvider>
-            <div>
-              <Navbar />
-              <Component {...pageProps} key={router.asPath} />
-            </div>
+            <Navbar />
+            <Component {...pageProps} key={router.asPath} />
           </UserTokenProvider>
         </RainbowKitProvider>
       </WagmiConfig>
