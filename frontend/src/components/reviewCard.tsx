@@ -40,12 +40,14 @@ export const ReviewCard: FC<ReviewCardProps> = ({
       </div>
       <div className="divider"></div>
       <div className="flex justify-between">
-        <div className="flex">
+        <div className="flex tooltip tooltip-primary" data-tip="Coming Soon">
           <div className="pl-5 pb-5"> 👍 Useful </div>
           <div className="pl-5 pb-5"> 👎 Not useful </div>
         </div>
         <div>
-          <a className="pr-5">{reviewDateParsed}</a>
+          <a className="pr-5">
+            {new Date(reviewDateParsed * 1000).toDateString()}
+          </a>
         </div>
       </div>
     </div>
