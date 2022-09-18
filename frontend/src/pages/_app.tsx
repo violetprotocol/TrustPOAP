@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
@@ -27,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { chains, wagmiClient } = provider;
   return (
     <div className="bg-gradient-to-br from-base-200 to-secondary via-base-200 h-full">
-      <header>
+      <Head>
         <title>Humanbound</title>
         <meta
           http-equiv="Content-Security-Policy"
@@ -35,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta name="description" content="Trust POAP - from Violet" />
         <link rel="shortcut icon" href="/violet.svg" />
-      </header>
+      </Head>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <UserTokenProvider>
