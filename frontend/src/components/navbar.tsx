@@ -2,19 +2,25 @@ import { ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import Image from "next/image";
+import { useRouter } from "next/router";
 // import "./navbar.css";
 
 export const Navbar = () => {
+  const router = useRouter();
   return (
     <div className="navbar bg-base-200">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
-          <Image
-            src="/TrustPOAP-logo-v2.svg"
-            alt="TrustPOAP-log"
-            height="60px"
-            width="320px"
-          />
+          {router.pathname == "/" ? (
+            <></>
+          ) : (
+            <Image
+              src="/TrustPOAP-logo-v2.svg"
+              alt="TrustPOAP-log"
+              height="60px"
+              width="320px"
+            />
+          )}
         </Link>
       </div>
       <div className="flex-none">
