@@ -12,20 +12,22 @@ To mitigate Sybil Attacks, we chose to use humanbound.xyz, which provides a uniq
 Ensure a review is made by an actual human
 Therefore, with POAPs + humanbound.xyz, trustPOAP can make sure a reviewer:
 
-✅ Is an actual attendee
-✅ Is a unique human
-✅ Can write only one review
-✅ Preserves user anonymity
-✅ Is censorship resistent
+- ✅ Is an actual attendee
+- ✅ Is a unique human
+- ✅ Can write only one review
+- ✅ Preserves user anonymity
+- ✅ Is censorship resistent
+
 Review content is saved on IPFS 🌐
+
 Review Hashes are immutable and submitted on the Blockchain 🔒
 
 To create a review a user needs to:
-1 - Participate at an event 💃
-2 - Receive a POAP from it
-3 - Be a Human ❌👽 (have a humanbound token from humanbound.xyz)
-4 - Cannot have previously submitted a review for this event (the transaction will fail 😉)
-5 - That's it 🎉
+1. Participate at an event 💃
+2. Receive a POAP from it
+3. Be a Human ❌👽 (have a humanbound token from humanbound.xyz)
+4. Cannot have previously submitted a review for this event (the transaction will fail 😉)
+5. That's it 🎉
 
 ## Deployments
 
