@@ -23,7 +23,7 @@ export const EventPage = () => {
       key={index}
       reviewerId={
         ctx.userPOAP
-          ? `${review.reviewer.slice(5)}...${review.reviewer.slice(-4, -1)}`
+          ? `${review.reviewer.slice(0, 5)}...${review.reviewer.slice(-4, -1)}`
           : "anon"
       }
       reviewScore={review.rating}
