@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import { useContext } from "react";
 import { ReviewForm } from "../../components/reviewForm/form";
-import { FormChecks } from "../../components/reviewForm/formChecks";
 import { UserTokensContext } from "../../context/userTokens";
 
 const ErrorCard = ({ children }) => {
@@ -70,9 +69,18 @@ const Form: NextPage = () => {
               <h1>Submit a review for this event</h1>
             </article>
 
-            <FormChecks userHasHbt={hasHBT} userHasPoap={hasPOAP} />
             {!hasHBT && <EnrollHBT />}
+            {hasHBT && (
+              <p className="break-words rounded-xl px-5 py-3 text-sm font-mono text-green-400">
+                You hold a Humanbound Token ✔️
+              </p>
+            )}
             {!hasPOAP && <YouWereNotThere />}
+            {hasPOAP && (
+              <p className="break-words rounded-xl px-5 text-sm font-mono text-green-400">
+                You attended this event ✔️
+              </p>
+            )}
             <ReviewForm />
           </div>
         </div>
