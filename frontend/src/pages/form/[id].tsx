@@ -73,7 +73,7 @@ const Form: NextPage = () => {
             <FormChecks userHasHbt={hasHBT} userHasPoap={hasPOAP} />
             {!hasHBT && <EnrollHBT />}
             {!hasPOAP && <YouWereNotThere />}
-            <ReviewForm />
+            {hasHBT && hasPOAP && <ReviewForm />}
           </div>
         </div>
       </div>
