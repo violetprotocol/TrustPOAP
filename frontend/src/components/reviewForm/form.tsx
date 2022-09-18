@@ -45,12 +45,10 @@ export const ReviewForm = () => {
   return (
     <>
       <form onSubmit={submit}>
-        <div className="mx-auto p-2 flex content-center">
-          <LabeledInput text="Rate this event">
-            <Stars register={register} />
-          </LabeledInput>
-          {errors?.rating && <ErrorDisplay>Rating is required</ErrorDisplay>}
-        </div>
+        <LabeledInput text="Rate this event">
+          <Stars register={register} />
+        </LabeledInput>
+        {errors?.rating && <ErrorDisplay>Rating is required</ErrorDisplay>}
 
         <LabeledInput text="Title">
           <input
