@@ -10,7 +10,7 @@ export const UserTokensContext = createContext(null);
 
 const useHasPOAP = (address: string, eventId: number) => {
   const [id, setId] = useState<string>("");
-  const userPOAP = useHasPoapFromEvent(id, address);
+  const { poap: userPOAP, isLoading } = useHasPoapFromEvent(id, address);
 
   useEffect(() => {
     if (!eventId) return;
@@ -18,7 +18,7 @@ const useHasPOAP = (address: string, eventId: number) => {
     setId(eventId.toString());
   }, [eventId, id]);
 
-  return userPOAP;
+  return { userPOAP, isLoading };
 };
 
 const useEventId = (setEvent) => {
@@ -32,14 +32,23 @@ const useEventId = (setEvent) => {
 
 export const UserTokenProvider = ({ children }) => {
   const { address } = useAccount();
-  const hasHBT = useHasHBT(address);
+  const { hasHBT, isLoading: hbtLoading } = useHasHBT(address);
   const hbtTokenId = useHBTTokenId(address, hasHBT);
 
   const [event, setEvent] = useState<GitPoapEvent>();
   useEventId(setEvent);
-  const userPOAP = useHasPOAP(address, event?.id);
+  const { userPOAP, isLoading: poapLoading } = useHasPOAP(address, event?.id);
 
-  const ctxValue = { address, hasHBT, hbtTokenId, event, setEvent, userPOAP };
+  const isLoading = hbtLoading || poapLoading;
+  const ctxValue = {
+    address,
+    hasHBT,
+    hbtTokenId,
+    event,
+    setEvent,
+    userPOAP,
+    isLoading,
+  };
 
   return (
     <UserTokensContext.Provider value={ctxValue}>

@@ -1,10 +1,11 @@
 import { NextPage } from "next";
+
 import { ReviewForm } from "../../components/reviewForm/form";
 import { FormChecks } from "../../components/reviewForm/formChecks";
 
 const Form: NextPage = () => {
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="min-h-screen bg-base-200 pt-5">
       <div className="hero-content text-center">
         <div className="max-w-lg bg-base-200">
           <article className="prose mb-5">
