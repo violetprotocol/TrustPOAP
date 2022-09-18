@@ -23,7 +23,7 @@ export const EventPage = () => {
       key={index}
       reviewerId={
         ctx.userPOAP
-          ? `${review.reviewer.slice(5)}...${review.reviewer.slice(-4, -1)}`
+          ? `${review.reviewer.slice(0, 5)}...${review.reviewer.slice(-4, -1)}`
           : "anon"
       }
       reviewScore={review.rating}
@@ -70,10 +70,14 @@ export const EventPage = () => {
 
   if (isLoading) {
     return (
-      <>
-        <div>LOADING.....</div>
-        <ReactLoading type="bubbles" color="#e3598c" />
-      </>
+      <div className="absolute inset-1/2">
+        <ReactLoading
+          type="bubbles"
+          color="#e3598c"
+          height="100px"
+          width="100px"
+        />
+      </div>
     );
   } else if (ctx?.event) {
     return (

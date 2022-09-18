@@ -71,8 +71,18 @@ const Form: NextPage = () => {
 
           <FormChecks userHasHbt={hasHBT} userHasPoap={hasPOAP} />
           {!hasHBT && <EnrollHBT />}
+          {hasHBT && (
+            <p className="break-words rounded-xl px-5 py-3 text-sm font-mono text-green-400">
+              You hold a Humanbound Token ✔️
+            </p>
+          )}
           {!hasPOAP && <YouWereNotThere />}
-          {hasHBT && hasPOAP && <ReviewForm />}
+          {hasPOAP && (
+            <p className="break-words rounded-xl px-5 text-sm font-mono text-green-400">
+              You attended this event ✔️
+            </p>
+          )}
+          <ReviewForm />
         </div>
       </div>
     </div>
