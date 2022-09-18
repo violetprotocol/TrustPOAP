@@ -20,9 +20,9 @@ const useIsMounted = (): boolean => {
 const provider = WebThreeProvider();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // const isMounted = useIsMounted();
-  // if (!isMounted || !provider) return null;
   const router = useRouter();
+  const isMounted = useIsMounted();
+  if (!isMounted || !provider) return null;
 
   const { chains, wagmiClient } = provider;
   return (

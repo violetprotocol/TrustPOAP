@@ -44,6 +44,7 @@ export const EventPage = () => {
 
   const fetchEventDetails = useCallback(
     async (eventId) => {
+      if (!eventId) return;
       try {
         setIsLoading(true);
         const result = await apiClient.getEvent(eventId);

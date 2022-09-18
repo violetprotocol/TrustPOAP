@@ -1,7 +1,7 @@
 import { URLBuilder } from "./urlBuilder";
 
 export type GitPoapEvent = {
-  id: number
+  id: number;
   fancy_id: string;
   name: string;
   event_url: string;
@@ -15,10 +15,10 @@ export type GitPoapEvent = {
   expiry_date: string;
   from_admin?: boolean;
   virtual_event?: boolean;
-  event_template_id?: number,
+  event_template_id?: number;
   event_host_id?: number;
   private_event?: boolean;
-}
+};
 
 export type GitPoap = {
   event: GitPoapEvent;
@@ -27,12 +27,12 @@ export type GitPoap = {
   layer: string;
   created: string;
   supply: GitPoapSupply;
-}
+};
 
 export type GitPoapSupply = {
   total: number;
   order: number;
-}
+};
 
 export class GitPoapApiClient {
   getEvent = async (eventId: string) => {
@@ -65,15 +65,13 @@ export class GitPoapApiClient {
       .appendPath(eventId.toString())
       .build();
 
-    const data = await fetch(getUserPoapByEventUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        return data;
-      })
-      .catch((e) => {
-        throw e;
-      });
-
-    return data;
+    try {
+      const response = await fetch(getUserPoapByEventUrl);
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      console.log("Your wallet does not have a POAP for this event.", e);
+      return null;
+    }
   };
 }
