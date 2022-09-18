@@ -10,7 +10,7 @@ export const UserTokensContext = createContext(null);
 
 const useHasPOAP = (address: string, eventId: number) => {
   const [id, setId] = useState<string>("");
-  const userPOAP = useHasPoapFromEvent(address, id);
+  const userPOAP = useHasPoapFromEvent(id, address);
 
   useEffect(() => {
     if (!eventId) return;
