@@ -93,7 +93,7 @@ export const EventPage = () => {
           rating={averageRating}
           numberOfReviews={reviews.length}
         />
-        <div>
+        <div className="w-full min-h-screen bg-white/60">
           <div className="max-w-2xl mx-auto">
             <LeaveReviewCard firstReview={reviews.length == 0} />
             {reviews.length > 0 && (
