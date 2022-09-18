@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="description" content="Trust POAP - from Violet" />
         <link rel="shortcut icon" href="/violet.svg" />
       </Head>
+
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <UserTokenProvider>
