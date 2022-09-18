@@ -10,11 +10,11 @@ export const LeaveReviewCard = (props) => {
   const eventId = ctx?.event?.id;
 
   return (
-    <div className="card lg:card-bottom bg-base-100 shadow-xl max-w-2xl my-4">
+    <div className="card lg:card-bottom bg-base-100 max-w-2xl my-4">
       <div className="card-body">
-        <div className="flex justify-between items-center">
+        <div className="mx-auto w-1/2">
           <Link href={{ pathname: "/form/[id]", query: { id: eventId } }}>
-            <button disabled={!eventId} className="btn btn-tertiary">
+            <button disabled={!eventId} className="btn btn-secondary w-full">
               {props.firstReview
                 ? "Be the first to leave a review"
                 : "Leave a review"}
