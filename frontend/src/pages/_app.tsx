@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
@@ -19,8 +20,9 @@ const useIsMounted = (): boolean => {
 const provider = WebThreeProvider();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const isMounted = useIsMounted();
-  if (!isMounted || !provider) return null;
+  // const isMounted = useIsMounted();
+  // if (!isMounted || !provider) return null;
+  const router = useRouter();
 
   const { chains, wagmiClient } = provider;
   return (
@@ -34,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <RainbowKitProvider chains={chains}>
           <UserTokenProvider>
             <Navbar />
-            <Component {...pageProps} />
+            <Component {...pageProps} key={router.asPath} />
           </UserTokenProvider>
         </RainbowKitProvider>
       </WagmiConfig>

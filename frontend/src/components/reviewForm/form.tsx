@@ -81,7 +81,7 @@ const submitReview = async (
 
 export const ReviewForm = () => {
   const ctx = useContext(UserTokensContext);
-  const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
+  const userPoap = ctx.userPOAP;
   const { submit, register, errors, ipfsHash } = useReviewForm();
   const submitReviewTx = useSubmitReview();
 

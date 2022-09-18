@@ -36,12 +36,9 @@ export const EventPage = () => {
       : 3;
 
   useEffect(() => {
-    if (!queriedEventId) {
+    if (!queriedEventId && queriedEventId !== eventId) {
       setQueriedEventId(eventId);
     }
-    return () => {
-      setQueriedEventId(null);
-    };
   }, [eventId, queriedEventId]);
 
   const fetchEventDetails = useCallback(
@@ -50,7 +47,7 @@ export const EventPage = () => {
         setIsLoading(true);
         const result = await apiClient.getEvent(eventId);
         setIsLoading(false);
-        ctx.setEvent(result);
+        if (result?.id !== eventId) ctx.setEvent(result);
       } catch (e) {
         setIsLoading(false);
         console.log(e);
