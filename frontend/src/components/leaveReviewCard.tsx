@@ -14,7 +14,7 @@ export const LeaveReviewCard = (props) => {
       <div className="card-body">
         <div className="flex justify-between items-center">
           <Link href={{ pathname: "/form/[id]", query: { id: eventId } }}>
-            <button disabled={!eventId} className="btn btn-secondary">
+            <button disabled={!eventId} className="btn btn-tertiary">
               {props.firstReview
                 ? "Be the first to leave a review"
                 : "Leave a review"}

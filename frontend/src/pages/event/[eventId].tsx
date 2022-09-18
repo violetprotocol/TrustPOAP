@@ -20,6 +20,7 @@ export const EventPage = () => {
 
   const reviewCards = reviews.map((review) => (
     <ReviewCard
+      key={review.reviewer}
       reviewerId={review.reviewer}
       reviewScore={review.rating}
       reviewTitle={review.title}
@@ -33,7 +34,7 @@ export const EventPage = () => {
     reviews.length > 0
       ? reviews.reduce((total, review) => total + review.rating, 0) /
         reviews.length
-      : 3;
+      : 0;
 
   useEffect(() => {
     if (!queriedEventId && queriedEventId !== eventId) {
