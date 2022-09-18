@@ -36,36 +36,44 @@ export type GitPoapSupply = {
 
 export class GitPoapApiClient {
   getEvent = async (eventId: string) => {
+    if (!eventId) {
+      console.error("Event ID not provided to PoapApiClient");
+      return null;
+    }
 
     const getEventUrl = new URLBuilder("https://api.poap.xyz/events/id/")
       .appendPath(eventId.toString())
       .build();
 
     const data = await fetch(getEventUrl.toString())
-    .then(response => response.json())
-    .then(data => {
-      return data;
-    }).catch((e) => {
-      throw e;
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((e) => {
+        throw e;
+      });
 
-    return data
-  }
+    return data;
+  };
 
   getUserPoapByEvent = async (eventId: string, walletAddress: string) => {
-    const getUserPoapByEventUrl = new URLBuilder("https://api.poap.tech/actions/scan/")
+    const getUserPoapByEventUrl = new URLBuilder(
+      "https://api.poap.tech/actions/scan/"
+    )
       .appendPath(walletAddress.toString().toLowerCase())
       .appendPath(eventId.toString())
       .build();
 
     const data = await fetch(getUserPoapByEventUrl)
-    .then(response => response.json())
-    .then(data => {
-      return data;
-    }).catch((e) => {
-      throw e;
-    });
-    
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((e) => {
+        throw e;
+      });
+
     return data;
-  }
+  };
 }

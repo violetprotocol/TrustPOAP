@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ReactLoading from "react-loading";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import EventCard from "../../components/EventCard/eventCard";
 import LeaveReviewCard from "../../components/leaveReviewCard";
 import ReviewCard from "../../components/reviewCard";
@@ -10,7 +10,8 @@ import { GitPoapApiClient } from "../../services/gitPoapApiClient";
 import { useReviews } from "../../context/useReviews";
 
 export const EventPage = () => {
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [queriedEventId, setQueriedEventId] = useState(null);
   const ctx = useContext(UserTokensContext);
   const router = useRouter();
   const apiClient = useMemo(() => new GitPoapApiClient(), []);
@@ -18,23 +19,42 @@ export const EventPage = () => {
   const eventReviews = useReviews(parseInt(eventId?.toString()));
 
   useEffect(() => {
-    const fetchEventDetails = async (eventId) => {
+    if (!queriedEventId) {
+      setQueriedEventId(eventId);
+    }
+    return () => {
+      setQueriedEventId(null);
+    };
+  }, [eventId]);
+
+  const fetchEventDetails = useCallback(
+    async (eventId) => {
       try {
+        setIsLoading(true);
         const result = await apiClient.getEvent(eventId);
-        setisLoading(false);
+        setIsLoading(false);
         ctx.setEvent(result);
       } catch (e) {
+        setIsLoading(false);
         console.log(e);
       }
-    };
+    },
+    [apiClient, ctx]
+  );
 
+  useEffect(() => {
     if (!ctx.event) {
-      fetchEventDetails(eventId);
+      fetchEventDetails(queriedEventId);
     }
-  }, [eventId, ctx.event, ctx, apiClient]);
+  }, [fetchEventDetails, ctx.event, queriedEventId]);
 
   if (isLoading) {
-    <ReactLoading type="bubbles" color="#fff" />;
+    return (
+      <>
+        <div>LOADING.....</div>
+        <ReactLoading type="bubbles" color="#e3598c" />
+      </>
+    );
   } else if (ctx?.event) {
     return (
       <div>
