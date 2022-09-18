@@ -20,7 +20,7 @@ export const Home = () => {
           <div className="pt-5">
             <input
               type="text"
-              placeholder="Enter a POAP event Id"
+              placeholder="Enter a POAP event Id, e.g 62659"
               className="input w-full max-w-xs"
               onChange={(input) => {
                 setEventToSearch(input.target.value);
