@@ -1,9 +1,8 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
-import { UserTokensContext } from "../context/userTokens";
+import { useState } from "react";
 
 export const Home = () => {
-  const ctx = useContext(UserTokensContext);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [eventToSearch, setEventToSearch] = useState<string>("");
@@ -16,7 +15,11 @@ export const Home = () => {
     <div className="hero min-h-screen">
       <div className="hero-content text-center">
         <div className="max-w-lg">
-          <img className="mx-auto pb-10" src="/TrustPOAP-logo-v2.svg" alt="" />
+          <Image
+            className="mx-auto pb-10"
+            src="/TrustPOAP-logo-v2.svg"
+            alt=""
+          />
           <h1 className="text-5xl font-bold">Verified POAP Reviews</h1>
           <h3 className="py-8 text-lg">Trusted reviews from POAP recipients</h3>
           <div className="pt-5">

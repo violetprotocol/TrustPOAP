@@ -45,9 +45,11 @@ export const ReviewCard: FC<ReviewCardProps> = ({
           <div className="pl-5 pb-5"> 👎 Not useful </div>
         </div>
         <div>
-          <a className="pr-5">
-            {new Date(reviewDateParsed * 1000).toDateString()}
-          </a>
+          {reviewDateParsed && (
+            <a className="pr-5">
+              {new Date(parseInt(reviewDateParsed) * 1000).toDateString()}
+            </a>
+          )}
         </div>
       </div>
     </div>
