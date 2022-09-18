@@ -10,7 +10,7 @@ export const getReviewFromIpfs = async (
 ): Promise<ReviewData | null> => {
   if (!hash) return null;
 
-  const response = await fetch(`http://ipfs.io/ipfs/${hash}`);
+  const response = await fetch(`https://ipfs.io/ipfs/${hash}`);
   if (response.status != HttpStatus.OK) {
     console.error("Couldn't fetch Review from IPFS", hash);
     return null;
