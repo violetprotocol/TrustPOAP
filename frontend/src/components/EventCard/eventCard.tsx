@@ -33,6 +33,7 @@ export const EventCard = ({
             width="300px"
             height="300px"
           />
+
           <div className="ml-6 text-center lg:text-left">
             <h1 className="text-5xl font-bold mb-4">{name}</h1>
             <div className="lg:flex">
@@ -45,6 +46,7 @@ export const EventCard = ({
             </div>
           </div>
         </div>
+
         <div className="row-start-2 px-2 mb-8 container max-w-6xl lg:mb-0 lg:max-w-6xl lg:px-10 lg:py-4 lg:pb-8 self-start text-center lg:text-left">
           <h3 className="text-xl mb-4 font-bold">
             {startDate} • {location == "virtual" ? `🌐 ` : `📍 `}
