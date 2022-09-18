@@ -18,7 +18,7 @@ export const ReviewCard: FC<ReviewCardProps> = ({
   reviewDate,
   reviewRating = 0,
 }) => {
-  const reviewerIdParsed = reviewerId ? reviewerId : "sudoferraz.eth";
+  const reviewerIdParsed = reviewerId ? reviewerId : "Unknown user";
   const reviewScoreParsed = reviewScore ? reviewScore : 3;
   const reviewTitleParsed = reviewTitle
     ? reviewTitle

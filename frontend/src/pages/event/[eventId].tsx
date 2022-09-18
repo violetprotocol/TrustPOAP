@@ -18,10 +18,14 @@ export const EventPage = () => {
   const { eventId } = router.query;
   const reviews = useReviews(parseInt(eventId?.toString()));
 
-  const reviewCards = reviews.map((review) => (
+  const reviewCards = reviews.map((review, index) => (
     <ReviewCard
-      key={review.reviewer}
-      reviewerId={review.reviewer}
+      key={index}
+      reviewerId={
+        ctx.userPOAP
+          ? `${review.reviewer.slice(5)}...${review.reviewer.slice(-4, -1)}`
+          : "anon"
+      }
       reviewScore={review.rating}
       reviewTitle={review.title}
       reviewBody={review.content}
