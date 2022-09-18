@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 import { UserTokensContext } from "../context/userTokens";
 
-export const LeaveReviewCard = () => {
+export const LeaveReviewCard = ({ firstReview }) => {
   const ctx = useContext(UserTokensContext);
   const eventId = ctx?.event?.id;
 
@@ -13,7 +13,7 @@ export const LeaveReviewCard = () => {
         <div className="mx-auto w-1/2">
           <Link href={{ pathname: "/form/[id]", query: { id: eventId } }}>
             <button disabled={!eventId} className="btn btn-primary w-full">
-              {props.firstReview
+              {firstReview
                 ? "Be the first to leave a review"
                 : "Leave a review"}
             </button>
