@@ -16,6 +16,11 @@ export const Home = () => {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
         <div className="max-w-lg">
+          <img
+            className="rounded-full mx-auto pb-10"
+            src="/TrustPOAP-logo-v2.svg"
+            alt=""
+          />
           <h1 className="text-5xl font-bold">Verified POAP Reviews</h1>
           <h3 className="py-8 text-lg">Trusted reviews from POAP recipients</h3>
           <div className="pt-5">
