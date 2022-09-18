@@ -1,10 +1,33 @@
-import { createContext, useState } from "react";
+import { useRouter } from "next/router";
+import { createContext, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { GitPoapEvent } from "../services/gitPoapApiClient";
 import { useHasHBT } from "./useCheckHumanBoundToken";
 import { useHBTTokenId } from "./useGetHumanBoundTokenId";
+import { useHasPoapFromEvent } from "./useGetUserPoapFromEvent";
 
 export const UserTokensContext = createContext(null);
+
+const useHasPOAP = (address: string, eventId: number) => {
+  const [id, setId] = useState<string>("");
+  const userPOAP = useHasPoapFromEvent(address, id);
+
+  useEffect(() => {
+    if (!eventId) return;
+    setId(eventId.toString());
+  }, [eventId]);
+
+  return userPOAP;
+};
+
+const useEventId = (setEvent) => {
+  const { query } = useRouter();
+  const id = query?.id as string;
+  useEffect(() => {
+    if (!id) return;
+    setEvent((event: GitPoapEvent) => ({ id: parseInt(id), ...event }));
+  }, [id, setEvent]);
+};
 
 export const UserTokenProvider = ({ children }) => {
   const { address } = useAccount();
@@ -12,8 +35,10 @@ export const UserTokenProvider = ({ children }) => {
   const hbtTokenId = useHBTTokenId(address, hasHBT);
 
   const [event, setEvent] = useState<GitPoapEvent>();
+  useEventId(setEvent);
+  const userPOAP = useHasPOAP(address, event?.id);
 
-  const ctxValue = { address, hasHBT, hbtTokenId, event, setEvent };
+  const ctxValue = { address, hasHBT, userPOAP, hbtTokenId, event, setEvent };
 
   return (
     <UserTokensContext.Provider value={ctxValue}>

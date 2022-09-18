@@ -1,9 +1,7 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { useHasPoapFromEvent } from "../context/useGetUserPoapFromEvent";
 import { UserTokensContext } from "../context/userTokens";
-import { RatingStars } from "./ratingStars";
 
 export const LeaveReviewCard = () => {
   const router = useRouter();
@@ -11,7 +9,7 @@ export const LeaveReviewCard = () => {
   const userPoap = useHasPoapFromEvent(ctx.event.id, ctx.address);
 
   const onClick = async () => {
-    router.push("/form");
+    router.push({ pathname: "/form", query: { id: ctx.event.id } });
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { GitPoap, GitPoapApiClient } from "../services/gitPoapApiClient";
 
 export const useHasPoapFromEvent = (eventId: string, address: string) => {
@@ -7,15 +7,17 @@ export const useHasPoapFromEvent = (eventId: string, address: string) => {
   useEffect(() => {
     const gitPoapApiClient = new GitPoapApiClient();
     (async () => {
-      if (!address) return;
+      if (!address || !eventId) return;
 
-      const response = await gitPoapApiClient.getUserPoapByEvent(eventId, address);
+      const response = await gitPoapApiClient.getUserPoapByEvent(
+        eventId,
+        address
+      );
       if (response?.tokenId) {
         setPoap(response);
       }
     })();
-    
   }, [address, eventId]);
 
   return poap;
-}
+};
